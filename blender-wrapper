@@ -35,7 +35,7 @@ fi
 # should be reinstalled.
 #
 
-if [ $(cat ~/.blender/VERSION) != $(cat /usr/lib/blender/VERSION) ]; then
+if [ $(cat ~/.blender/VERSION) != $(cat /usr/share/blender/VERSION) ]; then
     cp -a /usr/lib/blender/bpydata ~/.blender
     ln -sf /usr/lib/blender/scripts/* ~/.blender/scripts/
     cp -a /usr/lib/blender/VERSION ~/.blender
