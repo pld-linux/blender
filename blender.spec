@@ -25,7 +25,7 @@ Source0:	ftp://ftp.blender.nl/pub/%{arch_name}.tar.gz
 Source1:	%{name}.defaults
 Source2:	%{name}.sh
 Patch0:		%{name}-bmake.patch
-URL:		http://www.blender.nl
+URL:		http://www.blender.nl/
 Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
