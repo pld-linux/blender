@@ -8,7 +8,7 @@ Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
 Version:	2.36
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
@@ -16,9 +16,9 @@ Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}-config.opts
+Source4:	%{name}-wrapper
 Patch0:		%{name}-po_and_locale_names.patch
-Patch1:		%{name}-blanguages.patch
-Patch2:		%{name}-noxml-yafray.patch
+Patch1:		%{name}-noxml-yafray.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
@@ -58,8 +58,6 @@ Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
 %setup -q -n %{name}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-
 mv -f po/pt_{br,BR}.po
 install %{SOURCE3} config.opts
 
@@ -81,27 +79,41 @@ sed -i 's/python2\.3/python%{py_ver}/' config.opts
 scons
 %{__make} -C po OCGDIR=..
 
+install -d release/plugins/include
+install -m 644 source/blender/blenpluginapi/*.h release/plugins/include
+chmod +x release/plugins/bmake
+make -C release/plugins/
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir},%{_desktopdir},%{_pixmapsdir},%{_bindir}}
 
-install -m755 blender $RPM_BUILD_ROOT%{_bindir}
+install -m755 blender $RPM_BUILD_ROOT%{_bindir}/blender-bin
+install -m755 %{SOURCE4} $RPM_BUILD_ROOT%{_bindir}/blender
 install -m755 blenderplayer $RPM_BUILD_ROOT%{_bindir}
 install -c %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install -c %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
-cp -a bin/.blender/locale $RPM_BUILD_ROOT%{_datadir}
-cp -a bin/.blender/.Blanguages $RPM_BUILD_ROOT%{_datadir}/BlenderLanguages
-
-%find_lang %{name} --all-name
+install -d $RPM_BUILD_ROOT%{_libdir}/blender/plugins/sequence
+install -d $RPM_BUILD_ROOT%{_libdir}/blender/plugins/texture
+install -m644 ./release/plugins/sequence/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/sequence
+install -m644 ./release/plugins/texture/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/texture
+install -d $RPM_BUILD_ROOT%{_datadir}/blender/
+cp -a ./release/bpydata $RPM_BUILD_ROOT%{_datadir}/blender/
+cp -a ./release/scripts $RPM_BUILD_ROOT%{_datadir}/blender/
+install -m644 ./release/VERSION $RPM_BUILD_ROOT%{_datadir}/blender/
+install -m644 ./bin/.blender/.Blanguages $RPM_BUILD_ROOT%{_datadir}/blender/
+install -m644 ./bin/.blender/.bfont.ttf $RPM_BUILD_ROOT%{_datadir}/blender/
+cp -a bin/.blender/locale $RPM_BUILD_ROOT%{_datadir}/blender
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}.lang
+%files
 %defattr(644,root,root,755)
 %doc README doc/bf-members.txt doc/python-dev-guide.txt doc/oldbugs.txt doc/interface_API.txt 
 %doc release/text/{blender.html,release*.txt}
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_datadir}
+%attr(755,root,root) %{_libdir}
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
