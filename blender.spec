@@ -27,6 +27,7 @@ BuildRequires:	openssl-devel
 BuildRequires:	python-devel
 BuildRequires:	smpeg-devel
 BuildRequires:	zlib-devel
+BuildRequires:	nas-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
