@@ -7,6 +7,6 @@ Exec=blender
 Terminal=false
 Type=Application
 Icon=blender.png
-StartupNotify=true
+StartupNotify=false
 Categories=Graphics;
 # vi: encoding=utf-8
