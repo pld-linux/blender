@@ -1,9 +1,11 @@
 
+%include /usr/lib/rpm/macros.python
+
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz robienia gier
 Name:		blender
 Version:	2.25b.9
-Release:	1
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		http://www.linux.ucla.edu/~phaethon/blender/blender-autoconf.html
@@ -57,6 +59,7 @@ export CPPFLAGS LDFLAGS
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
+echo blender-creator-ph > $RPM_BUILD_ROOT%{py_sitedir}/blender.pth
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -65,3 +68,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README
 %attr(755,root,root) %{_bindir}/*
+%dir %{py_sitedir}/blender-creator-ph
+%attr(755,root,root) %{py_sitedir}/blender-creator-ph/*.so
+%{py_sitedir}/blender.pth
