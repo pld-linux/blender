@@ -18,15 +18,17 @@ Source2:	%{name}.png
 Source3:	%{name}-config.opts
 Patch0:		%{name}-po_and_locale_names.patch
 URL:		http://www.blender.org/
-#BuildRequires:	OpenAL-devel
+BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
+BuildRequires:	ftgl-devel
 #BuildRequires:	autoconf
 #BuildRequires:	automake
 #BuildRequires:	esound-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
+BuildRequires:	freetype-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	openssl-devel >= 0.9.7d
@@ -36,6 +38,7 @@ BuildRequires:	scons
 BuildRequires:	zlib-devel
 Requires:	OpenGL
 Requires:	python-modules
+Requires:       freetype
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
