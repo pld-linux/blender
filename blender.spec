@@ -73,7 +73,7 @@ install plugins/{Makefile,bmake} $RPM_BUILD_ROOT%{_examplesdir}/blender/plugins
 install plugins/sequence/{Makefile,*.c} $RPM_BUILD_ROOT%{_examplesdir}/blender/plugins/sequence
 install plugins/texture/{Makefile,*.c} $RPM_BUILD_ROOT%{_examplesdir}/blender/plugins/texture
 
-gzip -9nf README copyright.txt 
+gzip -9nf README copyright.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
