@@ -1,21 +1,27 @@
+# TODO:
+# - enable internalization support (BR libftgl)
+# - enable OpenAL support
+# - libsolid/libqhull/libode BR ?
+# - package python scripts
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.32
-Release:	4
+Version:	2.34
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.bz2
-# Source0-md5:	ebde5f573e19b7b8b64401d293c989e7
+# Source0-md5:	dad5ac3d415abefad9c52f7b814339d8
 Source1:	%{name}.desktop
 Source2:	%{name}.png
+Source3:	%{name}-config.opts
 Patch0:		%{name}-po_and_locale_names.patch
 URL:		http://www.blender.org/
 #BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
-BuildRequires:	autoconf
-BuildRequires:	automake
+#BuildRequires:	autoconf
+#BuildRequires:	automake
 #BuildRequires:	esound-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
@@ -24,6 +30,7 @@ BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	python-devel
+BuildRequires:	scons
 #BuildRequires:	smpeg-devel
 BuildRequires:	zlib-devel
 Requires:	OpenGL
@@ -47,25 +54,31 @@ Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
 
 mv -f po/pt_{br,BR}.po
 rm -rf bin/.blender/locale
+install %{SOURCE3} config.opts
 
 %build
 rm -f missing
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
-%configure
 
-%{__make}
+RPMCFLAGS="\"`echo %{rpmcflags}|sed 's/ /\",\"/g'`\""
+RPMLDFLAGS="\"`echo %{rpmldflags}|sed 's/ /\",\"/g'`\""
+
+sed -i -e "s|^CCFLAGS =.*|CCFLAGS = [$RPMCFLAGS]|" \
+	-e "s|^CXXFLAGS =.*|CXXFLAGS = [$RPMCFLAGS]|" \
+	-e "s|^LDFLAGS =.*|LDFLAGS = [$RPMLDFLAGS]|" \
+	config.opts
+sed -i -e "s|TARGET_CC =.*|TARGET_CC = '%{__cc}'|" \
+	-e "s|TARGET_CXX =.*|TARGET_CXX = '%{__cxx}'|" \
+	config.opts
+# TODO fix PYTHON_* vars in config.opts
+
+scons
 %{__make} -C po OCGDIR=..
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir},%{_desktopdir},%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_datadir},%{_desktopdir},%{_pixmapsdir},%{_bindir}}
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
-
+install -m755 blender $RPM_BUILD_ROOT%{_bindir}
 install -c %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install -c %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 cp -a bin/.blender/locale $RPM_BUILD_ROOT%{_datadir}
@@ -77,7 +90,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README release*.txt
+%doc README doc/bf-members.txt doc/python-dev-guide.txt doc/oldbugs.txt doc/interface_API.txt 
+%doc release/text/{blender.html,release*.txt}
 %attr(755,root,root) %{_bindir}/*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
