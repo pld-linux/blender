@@ -20,8 +20,6 @@ Version:	2.20
 Release:	1
 License:	Free for use
 Group:		Applications/Graphics
-Group(de):	Applikationen/Grafik
-Group(pl):	Aplikacje/Grafika
 Vendor:		NaN Technologies B.V.
 Source0:	ftp://ftp.blender.nl/pub/%{arch_name}.tar.gz
 Source1:	%{name}.defaults
