@@ -21,15 +21,12 @@ BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
-BuildRequires:	SDL-static
 BuildRequires:	libjpeg-devel
-BuildRequires:	libjpeg-static
 BuildRequires:	libpng-devel
 BuildRequires:	openssl-devel >= 0.9.7
 BuildRequires:	python-devel
 BuildRequires:	smpeg-devel
 BuildRequires:	zlib-devel
-BuildRequires:	libstdc++-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
