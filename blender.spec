@@ -46,6 +46,7 @@ Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
 %patch0 -p1
 
 mv -f po/pt_{br,BR}.po
+rm -rf bin/.blender/locale
 
 %build
 rm -f missing
@@ -56,7 +57,7 @@ rm -f missing
 %configure
 
 %{__make}
-%{__make} -C po OCGDIR=.
+%{__make} -C po OCGDIR=..
 
 %install
 rm -rf $RPM_BUILD_ROOT
