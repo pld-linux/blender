@@ -6,12 +6,12 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.34
+Version:	2.35
 Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.bz2
-# Source0-md5:	dad5ac3d415abefad9c52f7b814339d8
+# Source0-md5:	d451bb3047a9c2fe785c0b91f9769717
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}-config.opts
