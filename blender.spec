@@ -38,8 +38,8 @@ animation and game creation package for Unix, Windows and BeOS
 systems.
 
 %description -l pl
-Blender to darmowy i w peni funkcjonalny pakiet do tworzenia animacji
-3D oraz gier, dostpny dla systemów Unix, Windows i BeOS.
+Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
+3D oraz gier, dostêpny dla systemów Unix, Windows i BeOS.
 
 %prep
 %setup -q
