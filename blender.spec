@@ -9,6 +9,7 @@ Source0:	http://download.blender.org/source/%{name}-%{version}.tar.bz2
 # Source0-md5:	b1e00a4d8f63ca2a7598e20c89a0b7fd
 Source1:	%{name}.desktop
 Source2:	%{name}.png
+URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
