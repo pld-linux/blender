@@ -13,10 +13,10 @@ DEFINES = []
 CCFLAGS = []
 CXXFLAGS = []
 LDFLAGS = []
-USE_INTERNATIONAL = 'false'
+USE_INTERNATIONAL = 'true'
 BUILD_GAMEENGINE = 'true'
 USE_PHYSICS = 'solid'
-USE_OPENAL = 'false'
+USE_OPENAL = 'true'
 USE_FMOD = 'false'
 USE_QUICKTIME = 'false'
 
@@ -71,11 +71,11 @@ OPENAL_LIBRARY = ['openal']
 
 # The following information is only necessary when building with
 # internationalization support.
-FTGL_INCLUDE = ['#../lib/linux-glibc2.2.5-i386/ftgl/include']
-FTGL_LIBPATH = ['#../lib/linux-glibc2.2.5-i386/ftgl/lib']
+FTGL_INCLUDE = ['/usr/include/FTGL']
+FTGL_LIBPATH = ['/usr/lib64','/usr/lib']
 FTGL_LIBRARY = ['ftgl']
 FREETYPE_INCLUDE = ['/usr/include/freetype2']
-FREETYPE_LIBPATH = []
+FREETYPE_LIBPATH = ['/usr/lib64']
 FREETYPE_LIBRARY = ['freetype', 'z']
 GETTEXT_INCLUDE = []
 GETTEXT_LIBPATH = []
