@@ -9,6 +9,7 @@ Release:	0.1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.bz2
+# Source0-md5:	2b34e7ad67d02771a3fae0411c6fe845
 Patch0:		%{name}-python.patch
 Requires:	OpenGL
 BuildRequires:	autoconf
