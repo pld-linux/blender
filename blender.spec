@@ -79,6 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir},%{_desktopdir},%{_pixmapsdir},%{_bindir}}
 
 install -m755 blender $RPM_BUILD_ROOT%{_bindir}
+install -m755 blenderplayer $RPM_BUILD_ROOT%{_bindir}
 install -c %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install -c %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 cp -a bin/.blender/locale $RPM_BUILD_ROOT%{_datadir}
