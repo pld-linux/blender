@@ -1,0 +1,12 @@
+diff -urN blender/source/blender/src/buttons_scene.c /home/users/gj/rpm/BUILD/blender/source/blender/src/buttons_scene.c
+--- blender/source/blender/src/buttons_scene.c	2005-02-19 20:44:28.000000000 +0100
++++ /home/users/gj/rpm/BUILD/blender/source/blender/src/buttons_scene.c	2005-02-19 20:38:53.000000000 +0100
+@@ -1363,7 +1363,7 @@
+ 
+ 	uiDefButS(block,TOGN|BIT|0, B_REDR, "Auto AA", 5,140,150,20, &G.scene->r.YF_AA, 
+ 					0, 0, 0, 0, "Set AA using OSA and GI quality, disable for manual control");
+-	uiDefButS(block,TOGN|BIT|0, B_REDR, "xml", 175,140,75,20, &G.scene->r.YFexportxml,
++	uiDefButS(block,TOG|BIT|0, B_REDR, "xml", 175,140,75,20, &G.scene->r.YFexportxml,
+ 					0, 0, 0, 0, "Export to an xml file and call yafray instead of plugin");
+  	if(G.scene->r.YF_AA){
+ 		uiDefButI(block, NUM, B_DIFF, "AA Passes ", 5,115,150,20, &G.scene->r.YF_AApasses, 0, 64, 10, 10, "Number of AA passes (0 is no AA)");

@@ -1,0 +1,25 @@
+diff -urN blender/source/blender/src/language.c blendermod/source/blender/src/language.c
+--- blender/source/blender/src/language.c	2004-11-08 16:46:57.000000000 +0100
++++ blendermod/source/blender/src/language.c	2005-02-19 20:17:21.000000000 +0100
+@@ -323,12 +323,20 @@
+ #endif
+ 		lines= BLI_read_file_as_lines(name);
+ 
++		if (lines == NULL) {
++#if defined (__APPLE__)
++#else
++			strcpy(name, "/usr/share/BlenderLanguages");
++                        lines= BLI_read_file_as_lines(name);
++#endif
++		}
++	       
+ 		if(lines == NULL) {
+ 			/* If not found in .blender, try current dir */
+ 			strcpy(name, ".Blanguages");
+ 			lines= BLI_read_file_as_lines(name);
+ 			if(lines == NULL) {
+-					error("File \".Blanguages\" not found");
++                                        error("File \".Blanguages\" or \"/usr/share/BlenderLanguages\" not found");
+ 					return 0;
+ 			}
+ 		}
