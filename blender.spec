@@ -16,7 +16,7 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz robienia gier
 Name:		blender
-Version:	2.14
+Version:	2.20
 Release:	1
 License:	Free for use
 Group:		Applications/Graphics
