@@ -1,13 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Blender
-Name[pl]=Blender
 Comment=3D modeling, rendering, animation and game creation package
 Comment[pl]=Pakiet do tworzenia animacji 3D oraz gier
-Exec=/usr/bin/blender
+Exec=blender
 Terminal=false
 Type=Application
 Icon=blender.png
 StartupNotify=true
-Categories=Application;Graphics;
+Categories=Graphics;
 # vi: encoding=utf-8
