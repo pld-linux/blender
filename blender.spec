@@ -11,18 +11,18 @@ Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.bz2
 # Source0-md5:	2b34e7ad67d02771a3fae0411c6fe845
 Patch0:		%{name}-python.patch
-Requires:	OpenGL
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	libtool
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
+BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7
 BuildRequires:	python-devel
 BuildRequires:	smpeg-devel
 BuildRequires:	zlib-devel
+Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
@@ -53,7 +53,8 @@ export CPPFLAGS LDFLAGS
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 #echo blender-creator-ph > $RPM_BUILD_ROOT%{py_sitedir}/blender.pth
 
 %clean
