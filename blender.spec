@@ -1,12 +1,13 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.30
-Release:	1
+Version:	2.31
+%define _rel a
+Release:	%{_rel}.1
 License:	GPL
 Group:		X11/Applications/Graphics
-Source0:	http://download.blender.org/source/%{name}-%{version}.tar.bz2
-# Source0-md5:	6e413db3bdd6208ad47c35b66ce1fe58
+Source0:	http://download.blender.org/source/%{name}-%{version}%{_rel}.tar.bz2
+# Source0-md5:	834d9236b233951d854b02f7cd3721fb
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 URL:		http://www.blender.org/
@@ -41,7 +42,7 @@ Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
 3D oraz gier, dostêpny dla systemów Unix, Windows i BeOS.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}%{_rel}
 
 %build
 rm -f missing
