@@ -2,13 +2,16 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz robienia gier
 Name:		blender
-Version:	2.25b
+Version:	2.25b.9
 Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
-Vendor:		Blender Foundation
-Source0:	ftp://dl.xs4all.nl/pub/mirror/blender/%{name}-source-%{version}.tar.gz
-URL:		http://www.blender.org/
+Vendor:		http://www.linux.ucla.edu/~phaethon/blender/blender-autoconf.html
+Source0:	http://www.linux.ucla.edu/~phaethon/blender/blender-creator-ph-%{version}.tar.gz
+URL:		http://www.linux.ucla.edu/~phaethon/blender/blender-autoconf.html
+#Vendor:		Blender Foundation
+#Source0:	ftp://dl.xs4all.nl/pub/mirror/blender/%{name}-source-%{version}.tar.gz
+#http://www.linux.ucla.edu/~phaethon/blender/blender-autoconf.html
 Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -18,39 +21,22 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Blender is a free and fully functional 3D modeling, rendering,
 animation and game creation package for Unix, Windows and BeOS
-systems. Blender is distributed without sources, it is exclusively
-developed and maintained by the Dutch company NaN Technologies B.V.
+systems.
 
 %description -l pl
 Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
 3D oraz robienia gier, dostêpny dla systemów Unix, Windows i BeOS.
-Blender jest rozpowszechniany bez ¼róde³. Jest rozwijany przez
-holendersk± firmê NaN Technologies B.V.
 
 %prep
-%setup -q
+%setup -q -n %{name}-creator-ph-%{version}
 
 %build
+%configure
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/blender/plugins/{sequence,texture}}
-install -d $RPM_BUILD_ROOT{%{_datadir}/blender/{textures,sounds},%{_includedir}/blender}
-install -d $RPM_BUILD_ROOT%{_examplesdir}/blender/plugins/{sequence,texture}
-
-install %{SOURCE2} $RPM_BUILD_ROOT%{_bindir}/blender
-
-install blender $RPM_BUILD_ROOT%{_libdir}/blender
-install plugins/sequence/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/sequence
-install plugins/texture/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/texture
-
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/blender/defaults
-
-install plugins/include/* $RPM_BUILD_ROOT%{_includedir}/blender
-
-install plugins/{Makefile,bmake} $RPM_BUILD_ROOT%{_examplesdir}/blender/plugins
-install plugins/sequence/{Makefile,*.c} $RPM_BUILD_ROOT%{_examplesdir}/blender/plugins/sequence
-install plugins/texture/{Makefile,*.c} $RPM_BUILD_ROOT%{_examplesdir}/blender/plugins/texture
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
