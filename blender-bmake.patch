@@ -1,0 +1,54 @@
+diff -durN blender2.14-linux-glibc2.1.2-i386.orig/plugins/bmake blender2.14-linux-glibc2.1.2-i386/plugins/bmake
+--- blender2.14-linux-glibc2.1.2-i386.orig/plugins/bmake	Fri Jul 13 19:00:18 2001
++++ blender2.14-linux-glibc2.1.2-i386/plugins/bmake	Thu Aug  2 15:07:52 2001
+@@ -5,35 +5,36 @@
+ UNAME=`uname`
+ if ( test $UNAME = "IRIX64" ) then
+ 	CC="cc";
+-	CFLAGS="-KPIC -O2";
++	CFLAGS="-KPIC";
+ 
+ 	LD="ld";
+ 	LDFLAGS="-U";	
+ elif ( test $UNAME = "FreeBSD" ) then
+ 	CC="gcc";
+-	CFLAGS="-fPIC -funsigned-char -O2";
++	CFLAGS="-fPIC -funsigned-char";
+ 
+ 	LD="ld";
+ 	LDFLAGS="-Bshareable";
+ elif ( test $UNAME = "OpenBSD" ) then
+ 	CC="gcc";
+-	CFLAGS="-fPIC -funsigned-char -O2";
++	CFLAGS="-fPIC -funsigned-char";
+ 
+ 	LD="ld";
+ 	LDFLAGS="-Bshareable";
+ elif ( test $UNAME = "Linux" ) then
+ 	CC="gcc";
+-	CFLAGS="-fPIC -funsigned-char -O2";
++	CFLAGS="-fPIC -funsigned-char";
+ 
+ 	LD="ld";
+ 	LDFLAGS="-Bshareable";
+ elif ( test $UNAME = "SunOS" ) then
+ 	CC="cc";
+-	CFLAGS="-O2";
++	CFLAGS="";
+ 
+ 	LD="ld";
+ 	LDFLAGS="-r";
+ fi
++CFLAGS="$CFLAGS $OPTFLAGS"
+ 
+ if ( test "$#" = "1" ) then 
+ 	if ( test -f $1 ) then
+@@ -66,6 +67,8 @@
+ 	INCLUDES=-I..;
+ elif ( test -f "../include/plugin.h" ) then
+ 	INCLUDES=-I../include
++elif ( test -f "/usr/X11R6/include/blender/plugin.h" ) then
++	INCLUDES=-I/usr/X11R6/include/blender
+ else 
+ 	echo "Couldn't find plugin.h";
+ 	exit;
