@@ -1,7 +1,7 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.28c
+Version:	2.30
 Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -10,12 +10,12 @@ Source0:	http://download.blender.org/source/%{name}-%{version}.tar.bz2
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 URL:		http://www.blender.org/
-BuildRequires:	OpenAL-devel
+#BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	esound-devel
+#BuildRequires:	esound-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
@@ -23,7 +23,7 @@ BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	openssl-devel >= 0.9.7c
 BuildRequires:	python-devel
-BuildRequires:	smpeg-devel
+#BuildRequires:	smpeg-devel
 BuildRequires:	zlib-devel
 Requires:	OpenGL
 Requires:	python-modules
