@@ -17,6 +17,7 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}-config.opts
 Source4:	%{name}-wrapper
+Source5:	%{name}.manpage
 Patch0:		%{name}-po_and_locale_names.patch
 Patch1:		%{name}-noxml-yafray.patch
 URL:		http://www.blender.org/
@@ -104,7 +105,9 @@ install -m644 ./release/VERSION $RPM_BUILD_ROOT%{_datadir}/blender/
 install -m644 ./bin/.blender/.Blanguages $RPM_BUILD_ROOT%{_datadir}/blender/
 install -m644 ./bin/.blender/.bfont.ttf $RPM_BUILD_ROOT%{_datadir}/blender/
 cp -a bin/.blender/locale $RPM_BUILD_ROOT%{_datadir}/blender
-
+install -d $RPM_BUILD_ROOT%{_mandir}/man1
+install -m644 %{SOURCE5} $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
+ 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -117,3 +120,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
+%{_mandir}/man1/*
