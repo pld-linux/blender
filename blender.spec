@@ -1,31 +1,14 @@
 
-# chyba nie mo¿emy tego udostêpniaæ na naszym FTP
-# przynajmniej ja tak rozumiem fragment copyright.txt:
-#
-# "Distributing the Software 'bundled' in with ANY product is
-#  considered to be a 'commercial purpose'."
-
-
-%ifarch %{ix86}
-%define		arch_name blender%{version}-linux-glibc2.1.2-i386
-%endif
-%ifarch %{alpha}
-%define		arch_name blender%{version}-linux-glibc2.1.3-alpha
-%endif
-
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz robienia gier
 Name:		blender
-Version:	2.20
+Version:	2.25b
 Release:	1
-License:	Free for use
-Group:		Applications/Graphics
-Vendor:		NaN Technologies B.V.
-Source0:	ftp://ftp.blender.nl/pub/%{arch_name}.tar.gz
-Source1:	%{name}.defaults
-Source2:	%{name}.sh
-Patch0:		%{name}-bmake.patch
-URL:		http://www.blender.nl/
+License:	GPL
+Group:		X11/Applications/Graphics
+Vendor:		Blender Foundation
+Source0:	ftp://dl.xs4all.nl/pub/mirror/blender/%{name}-source-%{version}.tar.gz
+URL:		http://www.blender.org/
 Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -45,13 +28,9 @@ Blender jest rozpowszechniany bez ¼róde³. Jest rozwijany przez
 holendersk± firmê NaN Technologies B.V.
 
 %prep
-%setup -qn %{arch_name}
-%patch0 -p1
+%setup -q
 
 %build
-cd plugins
-%{__make} clean
-%{__make} OPTFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -78,7 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README copyright.txt
+%doc README
 %attr(755,root,root) %{_bindir}/blender
 %dir %{_libdir}/blender
 %attr(755,root,root) %{_libdir}/blender/blender
