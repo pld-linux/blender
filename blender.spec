@@ -1,15 +1,16 @@
 # TODO:
 # - check BRs
+# - localization
 #
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.28
+Version:	2.28c
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.bz2
-# Source0-md5:	4c86e9d28c6ca70b80375fd2c75423bb
+# Source0-md5:	b1e00a4d8f63ca2a7598e20c89a0b7fd
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 BuildRequires:	OpenAL-devel
@@ -55,12 +56,12 @@ rm -f missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir},%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -c %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}
+install -c %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install -c %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
@@ -70,5 +71,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README
 %attr(755,root,root) %{_bindir}/*
-%{_applnkdir}/%{name}.desktop
-%{_pixmapsdir}/%{name}.png
+%{_desktopdir}/*.desktop
+%{_pixmapsdir}/*.png
