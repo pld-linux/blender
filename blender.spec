@@ -17,6 +17,8 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}-config.opts
 Patch0:		%{name}-po_and_locale_names.patch
+Patch1:		%{name}-blanguages.patch
+Patch2:		%{name}-noxml-yafray.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
@@ -55,9 +57,10 @@ Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 mv -f po/pt_{br,BR}.po
-rm -rf bin/.blender/locale
 install %{SOURCE3} config.opts
 
 %build
@@ -87,6 +90,7 @@ install -m755 blenderplayer $RPM_BUILD_ROOT%{_bindir}
 install -c %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install -c %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 cp -a bin/.blender/locale $RPM_BUILD_ROOT%{_datadir}
+cp -a bin/.blender/.Blanguages $RPM_BUILD_ROOT%{_datadir}/BlenderLanguages
 
 %find_lang %{name} --all-name
 
@@ -98,5 +102,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc README doc/bf-members.txt doc/python-dev-guide.txt doc/oldbugs.txt doc/interface_API.txt 
 %doc release/text/{blender.html,release*.txt}
 %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_datadir}
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
