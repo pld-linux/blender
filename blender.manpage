@@ -1,0 +1,86 @@
+.TH BLENDER 1 "December  8, 1999"
+.SH NAME
+blender \- a 3D modelling and rendering package
+.SH SYNOPSIS
+.B blender [\-b <file>] [\-S <name>] [\-f <frame>] [\-s <frame>] [\-e <frame>] [\-a [<file(s)>] [\-m] [\-w] [\-H] [\-p <sx> <sy> <w> <h>] [\-f] [\-d] [\-h] [\-y]   
+
+
+.br
+.SH DESCRIPTION
+.PP
+\fBblender\fP is a 3D modelling and rendering package. It is the in-house software of a high quality animation studio, Blender has proven to be an extremely fast and versatile design instrument. The software has a personal touch, offering a unique approach to the world of Three Dimensions.
+Use Blender to create TV commercials, to make technical visualizations, business graphics, to do some morphing, or design user interfaces. You can easy build and manage complex environments. The renderer is versatile and extremely fast. All basic animation principles (curves & keys) are well implemented.
+
+http://www.blender3d.org
+.SH OPTIONS
+.B Render options:
+.br
+.br
+.B \-b <file>
+Render <file> in background
+.TP
+.B \-S <name>
+Set scene <name>
+.TP
+.B \-f <frame>
+Render frame <frame> and save it
+.TP
+.B \-s <frame>
+Set start to frame <frame> (use with -a)
+.TP
+.B \-e <frame>
+Set end to frame <frame> (use with -a)
+.TP
+.B \-a
+Render animation
+.TP
+.br
+.B Animation options:
+.TP
+.br
+.B \-a <file(s)>
+Playback <file(s)>
+.TP
+.B \-m
+Read from disk (Don't buffer)
+.TP
+.br
+.B Window options:
+.TP
+.br
+.B \-w
+Force opening with borders
+.TP
+.B \-H
+Patch for versions with hardware accelerated Mesa
+.TP
+.B \-p <sx> <sy> <w> <h>
+Open with lower left corner at <sx>, <sy> and width and height <w>, <h>
+.TP
+.br
+.B Misc options:
+.TP
+.br
+.B \-f
+Prevent forking in foreground mode
+.TP
+.B \-d
+Turn debugging on
+.TP
+.B \-h, 
+Show summary of options.
+.TP
+.B \-y
+Disable OnLoad scene scripts
+.br
+
+.SH SEE ALSO
+\fBpovray\fP(1)
+
+.br
+.SH AUTHOR
+Daniel Mester				<mester@uni-bremen.de>
+
+This manpage was written for a Debian GNU/Linux system.
+
+
