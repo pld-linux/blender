@@ -3,11 +3,14 @@
 # - enable OpenAL support
 # - libsolid/libqhull/libode BR ?
 # - package python scripts
+#
+# Conditional build:
+%bcond_with	python23	# build for Python 2.3
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
 Version:	2.35
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.bz2
@@ -29,7 +32,12 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	openssl-devel >= 0.9.7d
-BuildRequires:	python-devel
+%if %{with python23}
+BuildRequires:	python-devel >= 1:2.3
+BuildRequires:	python-devel < 1:2.4
+%else
+BuildRequires:	python-devel >= 1:2.3
+%endif
 BuildRequires:	scons
 #BuildRequires:	smpeg-devel
 BuildRequires:	zlib-devel
@@ -69,7 +77,9 @@ sed -i -e "s|^CCFLAGS =.*|CCFLAGS = [$RPMCFLAGS]|" \
 sed -i -e "s|TARGET_CC =.*|TARGET_CC = '%{__cc}'|" \
 	-e "s|TARGET_CXX =.*|TARGET_CXX = '%{__cxx}'|" \
 	config.opts
-# TODO fix PYTHON_* vars in config.opts
+%if %{without python23}
+sed -i 's/python2\.3/python2.4/' config.opts
+%endif
 
 scons
 %{__make} -C po OCGDIR=..
