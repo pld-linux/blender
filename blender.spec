@@ -83,7 +83,7 @@ scons
 install -d release/plugins/include
 install -m 644 source/blender/blenpluginapi/*.h release/plugins/include
 chmod +x release/plugins/bmake
-make -C release/plugins/
+%{__make} -C release/plugins/
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -96,17 +96,17 @@ install -c %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install -c %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 install -d $RPM_BUILD_ROOT%{_libdir}/blender/plugins/sequence
 install -d $RPM_BUILD_ROOT%{_libdir}/blender/plugins/texture
-install -m644 ./release/plugins/sequence/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/sequence
-install -m644 ./release/plugins/texture/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/texture
+install ./release/plugins/sequence/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/sequence
+install ./release/plugins/texture/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/texture
 install -d $RPM_BUILD_ROOT%{_datadir}/blender/
 cp -a ./release/bpydata $RPM_BUILD_ROOT%{_datadir}/blender/
 cp -a ./release/scripts $RPM_BUILD_ROOT%{_datadir}/blender/
-install -m644 ./release/VERSION $RPM_BUILD_ROOT%{_datadir}/blender/
-install -m644 ./bin/.blender/.Blanguages $RPM_BUILD_ROOT%{_datadir}/blender/
-install -m644 ./bin/.blender/.bfont.ttf $RPM_BUILD_ROOT%{_datadir}/blender/
+install ./release/VERSION $RPM_BUILD_ROOT%{_datadir}/blender/
+install ./bin/.blender/.Blanguages $RPM_BUILD_ROOT%{_datadir}/blender/
+install ./bin/.blender/.bfont.ttf $RPM_BUILD_ROOT%{_datadir}/blender/
 cp -a bin/.blender/locale $RPM_BUILD_ROOT%{_datadir}/blender
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install -m644 %{SOURCE5} $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
+install %{SOURCE5} $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
  
 %clean
 rm -rf $RPM_BUILD_ROOT
