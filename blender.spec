@@ -9,10 +9,22 @@ Group:		X11/Applications/Graphics
 Vendor:		http://www.linux.ucla.edu/~phaethon/blender/blender-autoconf.html
 Source0:	http://www.linux.ucla.edu/~phaethon/blender/blender-creator-ph-%{version}.tar.gz
 URL:		http://www.linux.ucla.edu/~phaethon/blender/blender-autoconf.html
-#Vendor:		Blender Foundation
-#Source0:	ftp://dl.xs4all.nl/pub/mirror/blender/%{name}-source-%{version}.tar.gz
-#http://www.linux.ucla.edu/~phaethon/blender/blender-autoconf.html
+#!#Vendor:		Blender Foundation
+#!#Source0:	ftp://dl.xs4all.nl/pub/mirror/blender/%{name}-source-%{version}.tar.gz
+#!#http://www.linux.ucla.edu/~phaethon/blender/blender-autoconf.html
+Patch0:		%{name}-python.patch
 Requires:	OpenGL
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool
+BuildRequires:	OpenGL-devel
+BuildRequires:	SDL-devel
+BuildRequires:	libjpeg-devel
+BuildRequires:	libpng-devel
+BuildRequires:	openssl-devel
+BuildRequires:	python-devel
+BuildRequires:	smpeg-devel
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
@@ -29,8 +41,16 @@ Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
 
 %prep
 %setup -q -n %{name}-creator-ph-%{version}
+%patch0 -p1
 
 %build
+CPPFLAGS="-I/usr/X11R6/include"
+LDFLAGS="-L/usr/X11R6/lib"
+export CPPFLAGS LDFLAGS
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
 %configure
 %{__make}
 
@@ -44,15 +64,4 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README
-%attr(755,root,root) %{_bindir}/blender
-%dir %{_libdir}/blender
-%attr(755,root,root) %{_libdir}/blender/blender
-%{_libdir}/blender/plugins
-%{_datadir}/blender
-%{_includedir}/blender
-%dir %{_examplesdir}/blender
-%dir %{_examplesdir}/blender/plugins
-%attr(755,root,root) %{_examplesdir}/blender/plugins/bmake
-%attr(755,root,root) %{_examplesdir}/blender/plugins/Makefile
-%{_examplesdir}/blender/plugins/texture
-%{_examplesdir}/blender/plugins/sequence
+%attr(755,root,root) %{_bindir}/*
