@@ -1,0 +1,352 @@
+diff -ur blender-2.32/po.orig/Makefile blender-2.32/po/Makefile
+--- blender-2.32/po.orig/Makefile	Mon Sep  8 14:13:53 2003
++++ blender-2.32/po/Makefile	Tue Aug  3 10:50:30 2004
+@@ -36,7 +36,7 @@
+ 
+ SOURCEDIR = blender/po
+ 
+-include nan_definitions.mk
++include ../source/nan_definitions.mk
+ 
+-LINGUAS = ca cs de es fr it ja nl sv
++LINGUAS = ca cs de es fi fr it ja nl pt_BR sv zh_CN
+ ifeq ($(OS), darwin)
+ DIR = $(OCGDIR)/bin/blender.app/Contents/Resources/locale/$@/LC_MESSAGES/
+ else
+diff -ur blender-2.32/po.orig/ca.po blender-2.32/po/ca.po
+--- blender-2.32/po.orig/ca.po	Wed May 14 17:04:27 2003
++++ blender-2.32/po/ca.po	Tue Aug  3 10:42:29 2004
+@@ -1,6 +1,16 @@
+ # Copyright (C) 2003 Free Software Foundation, Inc.
+ # Est. 2003.
+-#
++# translation to Catalan
++msgid ""
++msgstr ""
++""
++"Last-Translator: UNKNOWN\n"
++"PO-Revision-Date: 2003-04-19 21:47+0200\n"
++"Project-Id-Version: blender 2.32\n"
++"Language-Team: Catalan\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++
+ 
+ ###########################################################
+ ###
+diff -ur blender-2.32/po.orig/de.po blender-2.32/po/de.po
+--- blender-2.32/po.orig/de.po	Wed May 14 17:04:27 2003
++++ blender-2.32/po/de.po	Tue Aug  3 10:42:10 2004
+@@ -1,6 +1,15 @@
+ # Copyright (C) 2003 Free Software Foundation, Inc.
+ # snts &lt;snutlix@hotmail.com&gt;, 2003.
+-#
++# translation to German
++msgid ""
++msgstr ""
++""
++"Last-Translator: UNKNOWN\n"
++"PO-Revision-Date: 2003-04-19 21:47+0200\n"
++"Project-Id-Version: blender 2.32\n"
++"Language-Team: German\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
+ 
+ ###########################################################
+ ###
+diff -ur blender-2.32/po.orig/es.po blender-2.32/po/es.po
+--- blender-2.32/po.orig/es.po	Wed May 14 17:04:27 2003
++++ blender-2.32/po/es.po	Tue Aug  3 10:40:21 2004
+@@ -1,6 +1,16 @@
+ # Copyright (C) 2003 Free Software Foundation, Inc.
+ # Est. 2003.
+-#
++# translation to Spanish
++msgid ""
++msgstr ""
++""
++"Last-Translator: UNKNOWN\n"
++"PO-Revision-Date: 2003-04-19 21:47+0200\n"
++"Project-Id-Version: blender 2.32\n"
++"Language-Team: Spanish\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++
+ 
+ ###########################################################
+ ###
+diff -ur bblender-2.32/po.orig/fi.po blender-2.32/po/fi.po
+--- blender-2.32/po.orig/fi.po	Tue Aug  3 11:55:35
++++ blender-2.32/po/fi.po	Tue Aug  3 11:55:35
+@@ -1,4 +1,4 @@
+-﻿msgid ""
++msgid ""
+ msgstr ""
+ "Last-Translator: Nathan Letwory<jesterking@letwory.net>\n"
+ "PO-Revision-Date: 2003-04-18 18:30+0300\n"
+diff -ur blender-2.32/po.orig/ja.po blender-2.32/po/ja.po
+--- blender-2.32/po.orig/ja.po	Wed May 14 17:04:27 2003
++++ blender-2.32/po/ja.po	Tue Aug  3 10:45:45 2004
+@@ -1,7 +1,17 @@
+ # blender ja.po
+ # Copyright (C) 2003 Free Software Foundation, Inc.
+ # snts <snutlix@hotmail.com>, 2003.
+-#
++# translation to Japanese
++msgid ""
++msgstr ""
++""
++"Last-Translator: UNKNOWN\n"
++"PO-Revision-Date: 2003-04-19 21:47+0200\n"
++"Project-Id-Version: blender 2.32\n"
++"Language-Team: Japanese\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++
+ 
+ ###########################################################
+ ###
+diff -ur blender-2.32/po.orig/nl.po blender-2.32/po/nl.po
+--- blender-2.32/po.orig/nl.po	Wed May 14 17:04:27 2003
++++ blender-2.32/po/nl.po	Tue Aug  3 10:41:35 2004
+@@ -1,6 +1,16 @@
+ # blender nl.po
+ # Copyright (C) 2003 Free Software Foundation, Inc.
+ # phase, 2003.
++# translation to Dutch
++msgid ""
++msgstr ""
++""
++"Last-Translator: UNKNOWN\n"
++"PO-Revision-Date: 2003-04-19 21:47+0200\n"
++"Project-Id-Version: blender 2.32\n"
++"Language-Team: Dutch\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
+ 
+ ###########################################################
+ ###
+diff -ur blender-2.32/po.orig/pt_br.po blender-2.32/po/pt_br.po
+--- blender-2.32/po.orig/pt_br.po	Tue Jan 27 01:39:44 2004
++++ blender-2.32/po/pt_br.po	Tue Aug  3 10:45:02 2004
+@@ -1,6 +1,16 @@
+ # Translation of pt_br.po to Brazilian Portuguese. Version 0.1a
+ # Frank 2003
+ # Blender version: 2.31a 
++# translation to Portuguese (Brasil)
++msgid ""
++msgstr ""
++""
++"Last-Translator: UNKNOWN\n"
++"PO-Revision-Date: 2003-04-19 21:47+0200\n"
++"Project-Id-Version: blender 2.31a\n"
++"Language-Team: Portuguese (Brasil)\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
+ 
+ msgid "(De)Select All"
+ msgstr "(De)Selecionar Tudo"
+diff -ur blender-2.32/po.orig/zh_CN.po blender-2.32/po/zh_CN.po
+--- blender-2.32/po.orig/zh_CN.po	Tue Jan 27 12:12:33 2004
++++ blender-2.32/po/zh_CN.po	Tue Aug  3 10:44:01 2004
+@@ -2,6 +2,16 @@
+ # It's easy to translate this file to Tranditional Chinese by Word or something else
+ # I'll do the translation when more msgid have been added, or you can do it by yourself
+ # Li Jun <bl8nder@yahoo.com>, 2003
++# translation to Chinese (Simplified)
++msgid ""
++msgstr ""
++""
++"Last-Translator: UNKNOWN\n"
++"PO-Revision-Date: 2003-04-19 21:47+0200\n"
++"Project-Id-Version: blender 2.32\n"
++"Language-Team: Chinese\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
+ 
+ ###########################################################
+ ###
+@@ -486,8 +496,8 @@
+ msgstr ">圆"
+ msgid ">Surface"
+ msgstr ">表面"
+-msgid ">Tube"
+-msgstr ">管子"
++#msgid ">Tube"
++#msgstr ">管子"
+ msgid ">Sphere"
+ msgstr ">球"
+ msgid ">Donut"
+@@ -538,10 +548,10 @@
+ ###  Menubar >> ADD >> Surface
+ ###
+ ###########################################################
+-msgid "Adds a NURBS Curve"
+-msgstr "添加一个NURBS曲线"
+-msgid "Adds a NURBS Circle"
+-msgstr "添加一个NURBS圆"
++#msgid "Adds a NURBS Curve"
++#msgstr "添加一个NURBS曲线"
++#msgid "Adds a NURBS Circle"
++#msgstr "添加一个NURBS圆"
+ msgid "Adds a NURBS Surface"
+ msgstr "添加一个NURBS表面"
+ msgid "Adds a NURBS Tube"
+@@ -958,12 +968,12 @@
+ ###  ToolBox >> OBJECT (2)
+ ###
+ ###########################################################
+-msgid "Edit Mode"
+-msgstr "编辑模式"
++#msgid "Edit Mode"
++#msgstr "编辑模式"
+ msgid "Move To Layer"
+ msgstr "移到层："
+-msgid "Delete"
+-msgstr "删除"
++#msgid "Delete"
++#msgstr "删除"
+ msgid "Delete All"
+ msgstr "删除所有"
+ msgid "Apply Size/Rot"
+@@ -1018,12 +1028,12 @@
+ ###  ToolBox >> Curve
+ ###
+ ###########################################################
+-msgid "Deselect Linked"
+-msgstr "不选择连接的"
+-msgid "Extrude"
+-msgstr "挤压"
+-msgid "Delete Menu"
+-msgstr "删除菜单"
++#msgid "Deselect Linked"
++#msgstr "不选择连接的"
++#msgid "Extrude"
++#msgstr "挤压"
++#msgid "Delete Menu"
++#msgstr "删除菜单"
+ msgid "Make Segment"
+ msgstr ""
+ msgid "Cyclic"
+@@ -1126,12 +1136,12 @@
+ ###  Menu bar >> Add
+ ###
+ ###########################################################
+-msgid "MetaBall"
+-msgstr "变形球"
+-msgid "Empty"
+-msgstr "辅助对象"
+-msgid "Lattice"
+-msgstr "辅助网格"
++#msgid "MetaBall"
++#msgstr "变形球"
++#msgid "Empty"
++#msgstr "辅助对象"
++#msgid "Lattice"
++#msgstr "辅助网格"
+ 
+ 
+ ###########################################################
+@@ -1436,8 +1446,8 @@
+ msgid "Move objects to grid units"
+ msgstr "按网格大小移动对象"
+ 
+-msgid "Rotate"
+-msgstr "旋转"
++#msgid "Rotate"
++#msgstr "旋转"
+ msgid "Rotate objects to grid units"
+ msgstr "按网格大小旋转对象"
+ msgid "Size"
+@@ -1513,8 +1523,8 @@
+ msgstr ""
+ msgid "Automatic keyframe insertion in action ipo curve"
+ msgstr "在动作ipo曲线上插入自动关键帧"
+-msgid "Object"
+-msgstr ""
++#msgid "Object"
++#msgstr ""
+ msgid "Automatic keyframe insertion in object ipo curve"
+ msgstr "在对象ipo曲线上插入自动关键帧"
+ 
+@@ -1522,28 +1532,28 @@
+ msgid "Duplicate with object:"
+ msgstr "随对象一起复制："
+ 
+-msgid "Mesh"
+-msgstr "Mesh网格"
++#msgid "Mesh"
++#msgstr "Mesh网格"
+ msgid "Causes mesh data to be duplicated with Shift+D"
+ msgstr "Shift+D复制Mesh网格的数据"
+ 
+-msgid "Armature"
+-msgstr "骨骼"
++#msgid "Armature"
++#msgstr "骨骼"
+ msgid "Causes armature data to be duplicated with Shift+D"
+ msgstr "Shift+D复制骨骼地数据"
+ 
+-msgid "Surface"
+-msgstr "表面"
++#msgid "Surface"
++#msgstr "表面"
+ msgid "Causes surface data to be duplicated with Shift+D"
+ msgstr "Shift+D复制表面的数据"
+ 
+-msgid "Lamp"
+-msgstr "灯"
++#msgid "Lamp"
++#msgstr "灯"
+ msgid "Causes lamp data to be duplicated with Shift+D"
+ msgstr "Shift+D复制灯的数据"
+ 
+-msgid "Curve"
+-msgstr "曲线"
++#msgid "Curve"
++#msgstr "曲线"
+ msgid "Causes curve data to be duplicated with Shift+D"
+ msgstr "Shift+D复制曲线的数据"
+ 
+@@ -1552,8 +1562,8 @@
+ msgid "Causes material data to be duplicated with Shift+D"
+ msgstr "Shift+D复制材质的数据"
+ 
+-msgid "Text"
+-msgstr "文字"
++#msgid "Text"
++#msgstr "文字"
+ msgid "Causes text data to be duplicated with Shift+D"
+ msgstr "Shift+D复制文字的数据"
+ 
+@@ -1562,8 +1572,8 @@
+ msgid "Causes texture data to be duplicated with Shift+D"
+ msgstr "Shift+D复制纹理的数据"
+ 
+-msgid "Metaball"
+-msgstr "变形球"
++#msgid "Metaball"
++#msgstr "变形球"
+ msgid "Causes metaball data to be duplicated with Shift+D"
+ msgstr "Shift+D复制变形球的数据"
+ 
+@@ -1894,8 +1904,8 @@
+ 
+ msgid "Enables TexturePaint Mode"
+ msgstr ""
+-msgid "Save"
+-msgstr ""
++#msgid "Save"
++#msgstr ""
+ msgid "Saves image"
+ msgstr ""
+ msgid "Toggles forced redraw of other windows to reflect changes in real time"
+--- blender-2.32/bin/.blender/.Blanguages~	Tue Aug  3 11:40:56 2004
++++ blender-2.32/bin/.blender/.Blanguages	Tue Aug  3 11:40:56 2004
+@@ -9,5 +9,5 @@
+ Spanish:es_ES
+ Catalan:ca_ES
+ Czech:cs_CZ
+-Brazilian Portuguese:pt_br
++Brazilian Portuguese:pt_BR
+ Simplified Chinese:zh_CN
