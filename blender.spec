@@ -3,7 +3,6 @@
 # - enable OpenAL support
 # - libsolid/libqhull/libode BR ?
 # - package python scripts
-
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
@@ -37,6 +36,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	scons
+BuildRequires:	sed >= 4.0
 #BuildRequires:	smpeg-devel
 BuildRequires:	zlib-devel
 Requires:	OpenGL
@@ -81,7 +81,7 @@ scons
 %{__make} -C po OCGDIR=..
 
 install -d release/plugins/include
-install -m 644 source/blender/blenpluginapi/*.h release/plugins/include
+install source/blender/blenpluginapi/*.h release/plugins/include
 chmod +x release/plugins/bmake
 %{__make} -C release/plugins/
 
@@ -89,21 +89,21 @@ chmod +x release/plugins/bmake
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir},%{_desktopdir},%{_pixmapsdir},%{_bindir}}
 
-install -m755 blender $RPM_BUILD_ROOT%{_bindir}/blender-bin
-install -m755 %{SOURCE4} $RPM_BUILD_ROOT%{_bindir}/blender
-install -m755 blenderplayer $RPM_BUILD_ROOT%{_bindir}
-install -c %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install -c %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
+install blender $RPM_BUILD_ROOT%{_bindir}/blender-bin
+install %{SOURCE4} $RPM_BUILD_ROOT%{_bindir}/blender
+install blenderplayer $RPM_BUILD_ROOT%{_bindir}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 install -d $RPM_BUILD_ROOT%{_libdir}/blender/plugins/sequence
 install -d $RPM_BUILD_ROOT%{_libdir}/blender/plugins/texture
 install ./release/plugins/sequence/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/sequence
 install ./release/plugins/texture/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/texture
-install -d $RPM_BUILD_ROOT%{_datadir}/blender/
-cp -a ./release/bpydata $RPM_BUILD_ROOT%{_datadir}/blender/
-cp -a ./release/scripts $RPM_BUILD_ROOT%{_datadir}/blender/
-install ./release/VERSION $RPM_BUILD_ROOT%{_datadir}/blender/
-install ./bin/.blender/.Blanguages $RPM_BUILD_ROOT%{_datadir}/blender/
-install ./bin/.blender/.bfont.ttf $RPM_BUILD_ROOT%{_datadir}/blender/
+install -d $RPM_BUILD_ROOT%{_datadir}/blender
+cp -a ./release/bpydata $RPM_BUILD_ROOT%{_datadir}/blender
+cp -a ./release/scripts $RPM_BUILD_ROOT%{_datadir}/blender
+install ./release/VERSION $RPM_BUILD_ROOT%{_datadir}/blender
+install ./bin/.blender/.Blanguages $RPM_BUILD_ROOT%{_datadir}/blender
+install ./bin/.blender/.bfont.ttf $RPM_BUILD_ROOT%{_datadir}/blender
 cp -a bin/.blender/locale $RPM_BUILD_ROOT%{_datadir}/blender
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
 install %{SOURCE5} $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
