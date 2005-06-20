@@ -100,8 +100,7 @@ install -d $RPM_BUILD_ROOT%{_libdir}/blender/plugins/texture
 install ./release/plugins/sequence/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/sequence
 install ./release/plugins/texture/*.so $RPM_BUILD_ROOT%{_libdir}/blender/plugins/texture
 install -d $RPM_BUILD_ROOT%{_datadir}/blender
-cp -a ./release/bpydata $RPM_BUILD_ROOT%{_datadir}/blender
-cp -a ./release/scripts $RPM_BUILD_ROOT%{_datadir}/blender
+cp -aR ./release/scripts $RPM_BUILD_ROOT%{_datadir}/blender
 install ./release/VERSION $RPM_BUILD_ROOT%{_datadir}/blender
 install ./bin/.blender/.Blanguages $RPM_BUILD_ROOT%{_datadir}/blender
 install ./bin/.blender/.bfont.ttf $RPM_BUILD_ROOT%{_datadir}/blender
