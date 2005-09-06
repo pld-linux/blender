@@ -8,7 +8,7 @@ Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
 Version:	2.37a
 # 2.37a is not alpha. Is the latest, STABLE version of blender.
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
