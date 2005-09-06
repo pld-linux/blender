@@ -116,8 +116,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc README doc/bf-members.txt doc/python-dev-guide.txt doc/oldbugs.txt doc/interface_API.txt 
 %doc release/text/{blender.html,release*.txt}
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_datadir}
-%attr(755,root,root) %{_libdir}
+%attr(755,root,root) %{_datadir}/%{name}
+%attr(755,root,root) %{_libdir}/%{name}
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
 %{_mandir}/man1/*
