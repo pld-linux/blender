@@ -24,6 +24,7 @@ URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
+BuildRequires:	freetype-devel
 BuildRequires:	ftgl-devel
 #BuildRequires:	autoconf
 #BuildRequires:	automake
@@ -31,7 +32,6 @@ BuildRequires:	ftgl-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
-BuildRequires:	freetype-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	openssl-devel >= 0.9.7d
@@ -41,8 +41,8 @@ BuildRequires:	sed >= 4.0
 #BuildRequires:	smpeg-devel
 BuildRequires:	zlib-devel
 Requires:	OpenGL
+Requires:	freetype
 Requires:	python-modules
-Requires:       freetype
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
@@ -107,13 +107,13 @@ install ./bin/.blender/.bfont.ttf $RPM_BUILD_ROOT%{_datadir}/blender
 cp -a bin/.blender/locale $RPM_BUILD_ROOT%{_datadir}/blender
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
 install %{SOURCE5} $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
- 
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README doc/bf-members.txt doc/python-dev-guide.txt doc/oldbugs.txt doc/interface_API.txt 
+%doc README doc/bf-members.txt doc/python-dev-guide.txt doc/oldbugs.txt doc/interface_API.txt
 %doc release/text/{blender.html,release*.txt}
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_datadir}/%{name}
