@@ -6,13 +6,12 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.37a
-# 2.37a is not alpha. Is the latest, STABLE version of blender.
-Release:	2
+Version:	2.41
+Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
-# Source0-md5:	dd0002c09ecd68b3cb3e3d8f4ce31e83
+# Source0-md5:	f6b54ff73c37aaca4d3f5babdd156fbf
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}-config.opts
@@ -21,17 +20,17 @@ Source5:	%{name}.manpage
 Patch0:		%{name}-po_and_locale_names.patch
 Patch1:		%{name}-noxml-yafray.patch
 URL:		http://www.blender.org/
-BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
+BuildRequires:	freealut-devel
 BuildRequires:	freetype-devel
 BuildRequires:	ftgl-devel
-#BuildRequires:	autoconf
-#BuildRequires:	automake
+BuildRequires:	gettext-devel
 #BuildRequires:	esound-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
+BuildRequires:	libtiff-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	openssl-devel >= 0.9.7d
