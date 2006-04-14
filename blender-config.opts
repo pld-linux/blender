@@ -1,5 +1,5 @@
 # Configuration file containing user definable options.
-VERSION = '2.33-cvs'
+VERSION = '2.41'
 BUILD_BINARY = 'release'
 USE_BUILDINFO = 'true'
 BUILD_BLENDER_DYNAMIC = 'true'
@@ -19,6 +19,7 @@ USE_PHYSICS = 'solid'
 USE_OPENAL = 'true'
 USE_FMOD = 'false'
 USE_QUICKTIME = 'false'
+USE_FLUIDSIM = 'true'
 
 # Compiler information.
 HOST_CC = 'gcc'
@@ -49,6 +50,9 @@ PNG_LIBRARY = ['png']
 JPEG_INCLUDE = ['/usr/include']
 JPEG_LIBPATH = ['/usr/lib']
 JPEG_LIBRARY = ['jpeg']
+TIFF_INCLUDE = ['/usr/include']
+TIFF_LIBPATH = ['/usr/lib']
+TIFF_LIBRARY = ['tiff']
 OPENGL_INCLUDE = ['/usr/include']
 OPENGL_LIBPATH = ['/usr/lib', '/usr/X11R6/lib']
 OPENGL_LIBRARY = ['GL', 'GLU']
@@ -65,9 +69,12 @@ QHULL_LIBRARY = []
 ODE_INCLUDE = ['#../lib/linux-glibc2.2.5-i386/ode/include']
 ODE_LIBPATH = ['#../lib/linux-glibc2.2.5-i386/ode/lib']
 ODE_LIBRARY = ['ode']
+BULLET_INCLUDE = ['#extern/bullet', '#extern/bullet/LinearMath', '#extern/bullet/Bullet', '#extern/bullet/BulletDynamics']
+BULLET_LIBPATH = []
+BULLET_LIBRARY = []
 OPENAL_INCLUDE = ['/usr/include']
 OPENAL_LIBPATH = ['/usr/lib']
-OPENAL_LIBRARY = ['openal']
+OPENAL_LIBRARY = ['openal', 'alut']
 
 # The following information is only necessary when building with
 # internationalization support.

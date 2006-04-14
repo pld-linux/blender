@@ -1,11 +1,12 @@
---- blender/source/blender/src/buttons_scene.c.old	2005-06-20 14:57:25.000000000 +0200
-+++ blender/source/blender/src/buttons_scene.c	2005-06-20 14:57:44.000000000 +0200
-@@ -1332,7 +1332,7 @@
+diff -urN blender/source/blender/src/buttons_scene.c blender.new/source/blender/src/buttons_scene.c
+--- blender/source/blender/src/buttons_scene.c	2006-01-06 13:37:45.000000000 +0100
++++ blender.new/source/blender/src/buttons_scene.c	2006-04-13 18:11:55.000000000 +0200
+@@ -1392,7 +1392,7 @@
  	// label to force a boundbox for buttons not to be centered
  	uiDefBut(block, LABEL, 0, " ", 305,180,10,10, 0, 0, 0, 0, 0, "");
  
--	uiDefButS(block,TOGN|BIT|0, B_REDR, "xml", 5,180,75,20, &G.scene->r.YFexportxml,
-+	uiDefButS(block,TOG|BIT|0, B_REDR, "xml", 5,180,75,20, &G.scene->r.YFexportxml,
+-	uiDefButBitS(block, TOGN, 1, B_REDR, "xml", 5,180,75,20, &G.scene->r.YFexportxml,
++	uiDefButBitS(block, TOG, 1, B_REDR, "xml", 5,180,75,20, &G.scene->r.YFexportxml,
  					0, 0, 0, 0, "Export to an xml file and call yafray instead of plugin");
  
  	uiDefButF(block, NUMSLI, B_DIFF,"Bi ", 5,35,150,20,	&(G.scene->r.YF_raybias), 
