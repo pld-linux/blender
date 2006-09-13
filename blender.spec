@@ -77,6 +77,8 @@ sed -i -e "s|TARGET_CC =.*|TARGET_CC = '%{__cc}'|" \
 	config.opts
 sed -i 's/python2\.3/python%{py_ver}/' config.opts
 
+cp config.opts user-config.py
+
 scons
 %{__make} -C po OCGDIR=..
 
