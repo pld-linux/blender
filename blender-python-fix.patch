@@ -1,0 +1,10 @@
+--- blender2.42/config/linux2-config.py.org	2006-09-13 11:44:30.000000000 +0000
++++ blender2.42/config/linux2-config.py	2006-09-13 10:37:17.000000000 +0000
+@@ -1,6 +1,6 @@
+ LCGDIR = '../lib/linux2'
+ BF_PYTHON = '/usr'
+-BF_PYTHON_VERSION = '2.4'
++BF_PYTHON_VERSION = '2.5'
+ BF_PYTHON_INC = '${BF_PYTHON}/include/python${BF_PYTHON_VERSION}'
+ BF_PYTHON_BINARY = '${BF_PYTHON}/bin/python${BF_PYTHON_VERSION}'
+ BF_PYTHON_LIB = 'python${BF_PYTHON_VERSION}' #BF_PYTHON+'/lib/python'+BF_PYTHON_VERSION+'/config/libpython'+BF_PYTHON_VERSION+'.a'
