@@ -21,6 +21,7 @@ Patch0:		%{name}-po_and_locale_names.patch
 Patch1:		%{name}-noxml-yafray.patch
 Patch2:		%{name}-python-fix.patch
 URL:		http://www.blender.org/
+BuildRequires:	OpenEXR-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
 BuildRequires:	freealut-devel
