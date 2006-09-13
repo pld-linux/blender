@@ -336,7 +336,7 @@ diff -ur blender-2.32/po.orig/zh_CN.po blender-2.32/po/zh_CN.po
 +include ../source/nan_definitions.mk
  
 -LINGUAS = ca cs de es fr it ja nl sv sr sr@Latn uk pl pt_br
-+LINGUAS = ca cs de es fi fr it ja nl sv sr sr@Latn uk pl pt_br zh_CN
++LINGUAS = ca cs de es fi fr it ja nl sv sr sr@Latn uk pl pt_BR zh_CN
  ifeq ($(OS), darwin)
  DIR = $(OCGDIR)/bin/blender.app/Contents/Resources/locale/$@/LC_MESSAGES/
  else
