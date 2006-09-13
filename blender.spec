@@ -56,7 +56,7 @@ Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
 3D oraz gier, dostêpny dla systemów Unix, Windows i BeOS.
 
 %prep
-%setup -q -n %{name}
+%setup -q -n %{name}%{version}
 %patch0 -p1
 %patch1 -p1
 mv -f po/pt_{br,BR}.po
