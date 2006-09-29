@@ -78,7 +78,7 @@ LDFLAGS           = [$RPMLDFLAGS]
 TARGET_CC         = '%{__cc}'
 TARGET_CXX        = '%{__cxx}'
 
-BF_PYTHON_VERSION = '2.5'
+BF_PYTHON_VERSION = '%{py_ver}'
 
 LCGDIR            = 'lib/linux2'
 BF_BUILDDIR       = 'build/linux2'
