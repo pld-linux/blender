@@ -1,0 +1,26 @@
++++ blender-2.42a/source/gameengine/Expressions/ListValue.cpp.orig	2006-09-29 11:26:05.000000000 +0100
+--- blender-2.42a/source/gameengine/Expressions/ListValue.cpp	2006-09-29 12:11:04.000000000 +0100
+@@ -165,11 +165,11 @@
+ static PySequenceMethods listvalue_as_sequence = {
+ 	(inquiry)listvalue_bufferlen,//(inquiry)buffer_length, /*sq_length*/
+ 	(binaryfunc)listvalue_buffer_concat, /*sq_concat*/
+-	0,//(intargfunc)buffer_repeat, /*sq_repeat*/
++	(intargfunc)0,//(intargfunc)buffer_repeat, /*sq_repeat*/
+ 	(intargfunc)listvalue_buffer_item, /*sq_item*/
+ 	(intintargfunc)listvalue_buffer_slice, /*sq_slice*/
+-	0,//(intobjargproc)buffer_ass_item, /*sq_ass_item*/
+-	0,//(intintobjargproc)buffer_ass_slice, /*sq_ass_slice*/
++	(intobjargproc)0,//(intobjargproc)buffer_ass_item, /*sq_ass_item*/
++	(intintobjargproc)0,//(intintobjargproc)buffer_ass_slice, /*sq_ass_slice*/
+ };
+ 
+ 
+@@ -178,7 +178,7 @@
+ static PyMappingMethods instance_as_mapping = {
+ 	(inquiry)listvalue_bufferlen, /*mp_length*/
+ 	(binaryfunc)listvalue_mapping_subscript, /*mp_subscript*/
+-	0,//(objobjargproc)instance_ass_subscript, /*mp_ass_subscript*/
++	(objobjargproc)0,//(objobjargproc)instance_ass_subscript, /*mp_ass_subscript*/
+ };
+ 
+ 
