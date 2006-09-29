@@ -19,6 +19,7 @@ Source5:	%{name}.manpage
 Patch0:		%{name}-po_and_locale_names.patch
 Patch1:		%{name}-noxml-yafray.patch
 Patch2:		%{name}-python-fix.patch
+Patch3:		%{name}-cast.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenEXR-devel
 BuildRequires:	OpenGL-devel
@@ -61,6 +62,7 @@ Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 mv -f po/pt_{br,BR}.po
 
 rm -f missing
