@@ -1,5 +1,5 @@
 --- blender-2.42a/source/gameengine/Expressions/ListValue.cpp.orig	2004-06-07 12:03:11.000000000 +0100
-+++ blender-2.42a/source/gameengine/Expressions/ListValue.cpp	2006-09-29 15:05:36.000000000 +0100
++++ blender-2.42a/source/gameengine/Expressions/ListValue.cpp	2006-09-29 15:10:27.000000000 +0100
 @@ -23,12 +23,12 @@
  #include <config.h>
  #endif
@@ -40,7 +40,7 @@
 +	(ssizeargfunc)listvalue_buffer_item, /*sq_item*/
 +	(ssizessizeargfunc)listvalue_buffer_slice, /*sq_slice*/
 +	(ssizeobjargproc)0,//(intobjargproc)buffer_ass_item, /*sq_ass_item*/
-+	(ssizessizeargfunc)0,//(intintobjargproc)buffer_ass_slice, /*sq_ass_slice*/
++	(ssizessizeobjargproc)0,//(intintobjargproc)buffer_ass_slice, /*sq_ass_slice*/
  };
  
  
