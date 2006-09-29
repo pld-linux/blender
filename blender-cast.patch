@@ -5,7 +5,7 @@
  	(inquiry)listvalue_bufferlen,//(inquiry)buffer_length, /*sq_length*/
  	(binaryfunc)listvalue_buffer_concat, /*sq_concat*/
 -	0,//(intargfunc)buffer_repeat, /*sq_repeat*/
-+	(intargfunc)0,//(intargfunc)buffer_repeat, /*sq_repeat*/
++	(ssizeargfunc)0,//(intargfunc)buffer_repeat, /*sq_repeat*/
  	(intargfunc)listvalue_buffer_item, /*sq_item*/
  	(intintargfunc)listvalue_buffer_slice, /*sq_slice*/
 -	0,//(intobjargproc)buffer_ass_item, /*sq_ass_item*/
