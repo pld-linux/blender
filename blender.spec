@@ -63,7 +63,6 @@ Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
 %patch2 -p1
 mv -f po/pt_{br,BR}.po
 
-%build
 rm -f missing
 rm -f user-config.py
 
@@ -84,6 +83,7 @@ BF_BUILDDIR       = 'build/linux2'
 BF_INSTALLDIR     = 'install/linux2'
 END
 
+%build
 scons
 %{__make} -C po OCGDIR=..
 
