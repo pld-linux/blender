@@ -1,0 +1,2 @@
+- much sanner handling of scripts and blender data. Hence blender was created to be installed in home dir only,
+  it has to use ~/.blender/ dir with few links to correct location of all files. This is now done using wrapper.
