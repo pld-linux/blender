@@ -6,15 +6,14 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.42
-Release:	0.2
+Version:	2.42a
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
-# Source0-md5:	232d714a64c3a2208f0ea999fe4a2440
+# Source0-md5:	3d60b7ebe0dea47da12744fe2462d96c
 Source1:	%{name}.desktop
 Source2:	%{name}.png
-Source3:	%{name}-config.opts
 Source4:	%{name}-wrapper
 Source5:	%{name}.manpage
 Patch0:		%{name}-po_and_locale_names.patch
@@ -58,29 +57,32 @@ Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
 3D oraz gier, dostêpny dla systemów Unix, Windows i BeOS.
 
 %prep
-%setup -q -n %{name}%{version}
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 mv -f po/pt_{br,BR}.po
-install %{SOURCE3} config.opts
 
 %build
 rm -f missing
+rm -f user-config.py
 
 RPMCFLAGS="\"`echo %{rpmcflags}|sed 's/ /\",\"/g'`\""
 RPMLDFLAGS="\"`echo %{rpmldflags}|sed 's/ /\",\"/g'`\""
 
-sed -i -e "s|^CCFLAGS =.*|CCFLAGS = [$RPMCFLAGS]|" \
-	-e "s|^CXXFLAGS =.*|CXXFLAGS = [$RPMCFLAGS]|" \
-	-e "s|^LDFLAGS =.*|LDFLAGS = [$RPMLDFLAGS]|" \
-	config.opts
-sed -i -e "s|TARGET_CC =.*|TARGET_CC = '%{__cc}'|" \
-	-e "s|TARGET_CXX =.*|TARGET_CXX = '%{__cxx}'|" \
-	config.opts
-sed -i 's/python2\.3/python%{py_ver}/' config.opts
+cat > user-config.py <<END
+CCFLAGS           = [$RPMCFLAGS]
+CXXFLAGS          = [$RPMCFLAGS]
+LDFLAGS           = [$RPMLDFLAGS]
+TARGET_CC         = '%{__cc}'
+TARGET_CXX        = '%{__cxx}'
 
-cp config.opts user-config.py
+BF_PYTHON_VERSION = '2.5'
+
+LCGDIR            = 'lib/linux2'
+BF_BUILDDIR       = 'build/linux2'
+BF_INSTALLDIR     = 'install/linux2'
+END
 
 scons
 %{__make} -C po OCGDIR=..
@@ -92,11 +94,12 @@ chmod +x release/plugins/bmake
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir},%{_desktopdir},%{_pixmapsdir},%{_bindir}}
+install -d $RPM_BUILD_ROOT{%{_datadir},%{_desktopdir},%{_pixmapsdir},%{_bindir}} \
+	$RPM_BUILD_ROOT%{_datadir}/blender/bpydata
 
-install blender $RPM_BUILD_ROOT%{_bindir}/blender-bin
+install ./install/linux2/blender $RPM_BUILD_ROOT%{_bindir}/blender-bin
 install %{SOURCE4} $RPM_BUILD_ROOT%{_bindir}/blender
-install blenderplayer $RPM_BUILD_ROOT%{_bindir}
+#install blenderplayer $RPM_BUILD_ROOT%{_bindir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 install -d $RPM_BUILD_ROOT%{_libdir}/blender/plugins/sequence
