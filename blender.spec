@@ -4,7 +4,7 @@
 # - libsolid/libqhull/libode BR ?
 # - package python scripts
 Summary:	3D modeling, rendering, animation and game creation package
-Summary(pl):	Pakiet do tworzenia animacji 3D oraz gier
+Summary(pl.UTF-8):   Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
 Version:	2.42a
 Release:	3
@@ -53,9 +53,9 @@ Blender is a free and fully functional 3D modeling, rendering,
 animation and game creation package for Unix, Windows and BeOS
 systems.
 
-%description -l pl
-Blender to darmowy i w pe³ni funkcjonalny pakiet do tworzenia animacji
-3D oraz gier, dostêpny dla systemów Unix, Windows i BeOS.
+%description -l pl.UTF-8
+Blender to darmowy i w peÅ‚ni funkcjonalny pakiet do tworzenia animacji
+3D oraz gier, dostÄ™pny dla systemÃ³w Unix, Windows i BeOS.
 
 %prep
 %setup -q
