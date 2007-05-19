@@ -22,6 +22,7 @@ URL:		http://www.blender.org/
 BuildRequires:	OpenEXR-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
+BuildRequires:	gcc >= 5:3.4.0
 BuildRequires:	freealut-devel
 BuildRequires:	freetype-devel
 BuildRequires:	ftgl-devel
@@ -82,7 +83,7 @@ BF_INSTALLDIR     = 'install/linux2'
 END
 
 %build
-scons
+scons BF_OPENGL_LIBPATH=%{_x_libraries}
 %{__make} -C po OCGDIR=..
 
 install -d release/plugins/include
