@@ -6,12 +6,12 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.44
+Version:	2.45
 Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
-# Source0-md5:	7ac841f6feb27e9d7fb6d77cf137be12
+# Source0-md5:	1358ca481b7f2b8eadd3327ebbd563ef
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source4:	%{name}-wrapper
