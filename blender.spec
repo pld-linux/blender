@@ -7,7 +7,7 @@ Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
 Version:	2.45
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
@@ -69,8 +69,8 @@ RPMCFLAGS="\"`echo %{rpmcflags}|sed 's/ /\",\"/g'`\""
 RPMLDFLAGS="\"`echo %{rpmldflags}|sed 's/ /\",\"/g'`\""
 
 cat > user-config.py <<END
-CCFLAGS           = [$RPMCFLAGS]
-CXXFLAGS          = [$RPMCFLAGS]
+CCFLAGS           = [$RPMCFLAGS, "-funsigned-char", "-fPIC"]
+CXXFLAGS          = [$RPMCFLAGS, "-funsigned-char", "-fPIC"]
 LDFLAGS           = [$RPMLDFLAGS]
 TARGET_CC         = '%{__cc}'
 TARGET_CXX        = '%{__cxx}'
