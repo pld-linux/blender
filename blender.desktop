@@ -8,4 +8,5 @@ Type=Application
 Icon=blender
 StartupNotify=false
 Categories=Graphics;3DGraphics;
+MimeType=application/x-blender;
 # vi: encoding=utf-8
