@@ -35,10 +35,12 @@ BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	python-devel >= 1:2.3
+BuildRequires:	rpmbuild(macros) >= 1.385
 BuildRequires:	scons
 BuildRequires:	sed >= 4.0
 #BuildRequires:	smpeg-devel
 BuildRequires:	zlib-devel
+Requires(post,postun):	desktop-file-utils
 Requires:	OpenGL
 Requires:	freetype
 Requires:	python-modules
@@ -122,6 +124,12 @@ install %{SOURCE5} $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%update_desktop_database_post
+
+%postun
+%update_desktop_database_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
