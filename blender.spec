@@ -1,17 +1,15 @@
 # TODO:
 # - enable internalization support (BR libftgl)
-# - enable OpenAL support
 # - libsolid/libqhull/libode BR ?
-# - package python scripts
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.45
-Release:	3
+Version:	2.46
+Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
-# Source0-md5:	1358ca481b7f2b8eadd3327ebbd563ef
+# Source0-md5:	e90543a5ca5db8b04498ab0abe7bbd2c
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source4:	%{name}-wrapper
@@ -23,6 +21,7 @@ BuildRequires:	OpenEXR-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
 BuildRequires:	gcc >= 5:3.4.0
+BuildRequires:	ffmpeg-devel
 BuildRequires:	freealut-devel
 BuildRequires:	freetype-devel
 BuildRequires:	ftgl-devel
@@ -60,10 +59,10 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %setup -q
 %patch0 -p1
 %patch1 -p1
-mv -f po/pt_{br,BR}.po
 
 rm -f missing
 rm -f user-config.py
+rm -rf bin/.blender/locale
 
 RPMCFLAGS="\"`echo %{rpmcflags}|sed 's/ /\",\"/g'`\""
 RPMLDFLAGS="\"`echo %{rpmldflags}|sed 's/ /\",\"/g'`\""
@@ -77,13 +76,18 @@ TARGET_CXX        = '%{__cxx}'
 
 BF_PYTHON_VERSION = '%{py_ver}'
 
+BF_FFMPEG         = '/usr'
+BF_FFMPEG_INC     = '%{_includedir}/ffmpeg'
+BF_FFMPEG_LIBPATH = '%{_libdir}'
+BF_FFMPEG_LIB     = 'avformat avcodec swscale avutil'
+
 LCGDIR            = 'lib/linux2'
 BF_BUILDDIR       = 'build/linux2'
 BF_INSTALLDIR     = 'install/linux2'
 END
 
 %build
-scons BF_OPENGL_LIBPATH=%{_x_libraries}
+%scons BF_OPENGL_LIBPATH=%{_x_libraries}
 %{__make} -C po OCGDIR=..
 
 install -d release/plugins/include
@@ -110,14 +114,16 @@ cp -aR ./release/scripts $RPM_BUILD_ROOT%{_datadir}/blender
 install ./release/VERSION $RPM_BUILD_ROOT%{_datadir}/blender
 install ./bin/.blender/.Blanguages $RPM_BUILD_ROOT%{_datadir}/blender
 install ./bin/.blender/.bfont.ttf $RPM_BUILD_ROOT%{_datadir}/blender
-cp -a bin/.blender/locale $RPM_BUILD_ROOT%{_datadir}/blender
+cp -a bin/.blender/locale $RPM_BUILD_ROOT%{_datadir}
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
 install %{SOURCE5} $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
+
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc README doc/bf-members.txt doc/python-dev-guide.txt doc/oldbugs.txt doc/interface_API.txt
 %doc release/text/{blender.html,release*.txt}
