@@ -1,18 +1,6 @@
-diff -ur blender-2.44-o/bin/.blender/.Blanguages blender-2.44/bin/.blender/.Blanguages
---- blender-2.44-o/bin/.blender/.Blanguages	2007-02-09 08:42:05.000000000 -0700
-+++ blender-2.44/bin/.blender/.Blanguages	2007-05-18 15:05:18.000000000 -0600
-@@ -9,7 +9,7 @@
- Spanish:es_ES
- Catalan:ca_ES
- Czech:cs_CZ
--Brazilian Portuguese:pt_br
-+Brazilian Portuguese:pt_BR
- Simplified Chinese:zh_CN
- Russian:ru_RU
- Croatian:hr_HR
-diff -ur blender-2.44-o/po/ca.po blender-2.44/po/ca.po
---- blender-2.44-o/po/ca.po	2003-05-14 09:04:27.000000000 -0600
-+++ blender-2.44/po/ca.po	2007-05-18 15:05:18.000000000 -0600
+diff -urN blender-2.46/po/ca.po blender-2.46.new/po/ca.po
+--- blender-2.46/po/ca.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/ca.po	2008-05-30 22:10:09.000000000 +0200
 @@ -1,6 +1,17 @@
  # Copyright (C) 2003 Free Software Foundation, Inc.
  # Est. 2003.
@@ -32,20 +20,9 @@ diff -ur blender-2.44-o/po/ca.po blender-2.44/po/ca.po
  
  ###########################################################
  ###
-diff -ur blender-2.44-o/po/cs.po blender-2.44/po/cs.po
---- blender-2.44-o/po/cs.po	2006-10-09 12:19:00.000000000 -0600
-+++ blender-2.44/po/cs.po	2007-05-18 15:05:18.000000000 -0600
-@@ -6,6 +6,7 @@
- "PO-Revision-Date: 2003-05-16 20:22+0200\n"
- "Last-Translator: jiri <jiri.hnidek@vslib.cz>\n"
- "Language-Team: Czech <cs@li.org>\n"
-+"MIME-Version: 1.0\n"
- "Content-Type: text/plain; charset=UTF-8\n"
- "Content-Transfer-Encoding: 8bit\n"
- 
-diff -ur blender-2.44-o/po/de.po blender-2.44/po/de.po
---- blender-2.44-o/po/de.po	2003-05-14 09:04:27.000000000 -0600
-+++ blender-2.44/po/de.po	2007-05-18 15:05:18.000000000 -0600
+diff -urN blender-2.46/po/de.po blender-2.46.new/po/de.po
+--- blender-2.46/po/de.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/de.po	2008-05-30 22:11:28.000000000 +0200
 @@ -1,6 +1,16 @@
  # Copyright (C) 2003 Free Software Foundation, Inc.
  # snts &lt;snutlix@hotmail.com&gt;, 2003.
@@ -64,9 +41,9 @@ diff -ur blender-2.44-o/po/de.po blender-2.44/po/de.po
  
  ###########################################################
  ###
-diff -ur blender-2.44-o/po/es.po blender-2.44/po/es.po
---- blender-2.44-o/po/es.po	2004-02-17 05:34:56.000000000 -0700
-+++ blender-2.44/po/es.po	2007-05-18 15:05:18.000000000 -0600
+diff -urN blender-2.46/po/es.po blender-2.46.new/po/es.po
+--- blender-2.46/po/es.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/es.po	2008-05-30 22:11:26.000000000 +0200
 @@ -1,6 +1,17 @@
  # Copyright (C) 2003 Free Software Foundation, Inc.
  # Est. 2003.
@@ -86,11 +63,11 @@ diff -ur blender-2.44-o/po/es.po blender-2.44/po/es.po
  
  ###########################################################
  ###
-diff -ur blender-2.44-o/po/fi.po blender-2.44/po/fi.po
---- blender-2.44-o/po/fi.po	2006-07-02 09:02:19.000000000 -0600
-+++ blender-2.44/po/fi.po	2007-05-18 15:05:18.000000000 -0600
+diff -urN blender-2.46/po/fi.po blender-2.46.new/po/fi.po
+--- blender-2.46/po/fi.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/fi.po	2008-05-30 22:14:24.000000000 +0200
 @@ -1,13 +1,18 @@
--﻿#"Last-Translator: Nathan Letwory<jesterking@letwory.net>\n"
+-#"Last-Translator: Nathan Letwory<jesterking@letwory.net>\n"
 -#"PO-Revision-Date: 2003-04-18 18:30+0300\n"
 -#"Language-Team: Finnish\n"
 -#"Content-Type: text/plain; charset=UTF-8\n"
@@ -115,10 +92,10 @@ diff -ur blender-2.44-o/po/fi.po blender-2.44/po/fi.po
  ###########################################################
  ###
  ###  Render Window
-diff -ur blender-2.44-o/po/fr.po blender-2.44/po/fr.po
---- blender-2.44-o/po/fr.po	2007-05-09 08:41:11.000000000 -0600
-+++ blender-2.44/po/fr.po	2007-05-18 15:08:30.000000000 -0600
-@@ -1,11 +1,14 @@
+diff -urN blender-2.46/po/fr.po blender-2.46.new/po/fr.po
+--- blender-2.46/po/fr.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/fr.po	2008-05-30 22:31:41.000000000 +0200
+@@ -1,11 +1,16 @@
  # French UI Translation
  # eon <eon.2007@free.fr>, 2007
 -#"Last-Translator: eon <eon.2007@free.fr>\n"
@@ -130,20 +107,20 @@ diff -ur blender-2.44-o/po/fr.po blender-2.44/po/fr.po
 +msgid ""
 +msgstr ""
 +""
++"Project-Id-Version: \n"
 +"Last-Translator: eon <eon.2007@free.fr>\n"
 +"PO-Revision-Date: 2007-05-07 01:00+0100\n"
 +"Content-Type: text/plain; charset=UTF-8\n"
 +"Content-Transfer-Encoding: 8bit\n"
-+"Language-Team: eon (eon@jabber.fr) , serialsiner , kaal / project page : http://wiki.blender.org/index.php/Interface/fr"
++"Language-Team: eon (eon@jabber.fr) , serialsiner , kaal / project page : http://wiki.blender.org/index.php/Interface/fr\n"
++"MIME-Version: 1.0\n"
 +"X-Generator: Gedit 2.18.0\n"
  
  # Copyright (C) 2005 Free Software Foundation, Inc.
  #
-Only in blender-2.44/po: fr.po~
-Only in blender-2.44/po: fr.po.orig
-diff -ur blender-2.44-o/po/hr.po blender-2.44/po/hr.po
---- blender-2.44-o/po/hr.po	2006-07-02 09:02:19.000000000 -0600
-+++ blender-2.44/po/hr.po	2007-05-18 15:05:18.000000000 -0600
+diff -urN blender-2.46/po/hr.po blender-2.46.new/po/hr.po
+--- blender-2.46/po/hr.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/hr.po	2008-05-30 22:14:49.000000000 +0200
 @@ -1,14 +1,18 @@
  # Croatian Translation. Version 0.1
  # tommy5  tommy555@net.hr, 2004
@@ -171,42 +148,48 @@ diff -ur blender-2.44-o/po/hr.po blender-2.44/po/hr.po
  
  # #########################################################
  # #
-diff -ur blender-2.44-o/po/it.po blender-2.44/po/it.po
---- blender-2.44-o/po/it.po	2006-07-02 09:02:19.000000000 -0600
-+++ blender-2.44/po/it.po	2007-05-18 15:05:18.000000000 -0600
-@@ -6,16 +6,19 @@
- # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
- # Gianluca Faletti <kino@kino3d.com>, 2006.
- #
--#"Project-Id-Version: it-241\n"
--#"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
--#"POT-Creation-Date: 2006-03-27 13:42+0200\n"
--#"PO-Revision-Date: 2006-04-26 00:53+0200\n"
--#"Last-Translator: Gianluca Faletti <kino@kino3d.com>\n"
--#"Language-Team: Italian <it@li.org>\n"
+diff -urN blender-2.46/po/it.po blender-2.46.new/po/it.po
+--- blender-2.46/po/it.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/it.po	2008-05-30 22:26:38.000000000 +0200
+@@ -1,18 +1,21 @@
+ # Italian translation for blender
+-#
+-#"Project-Id-Version: it-246\n"
+-#"POT-Creation-Date: \n"
+-#"PO-Revision-Date: 2008-02-29 21:39+0100\n"
+-#"Last-Translator: Skynet_italy <fiott@tin.it>\n"
+-#"Language-Team:  <it@li.org>\n"
 -#"MIME-Version: 1.0\n"
 -#"Content-Type: text/plain; charset=UTF-8\n"
 -#"Content-Transfer-Encoding: 8bit\n"
--#"X-Generator: KBabel 1.10.2\n"
+-#"X-Poedit-Language: Italian\n"
+-#"X-Poedit-Country: ITALY\n"
+-#"X-Poedit-SourceCharset: utf-8\n"
+-#"X-Generator: KBabel 1.11.4\n"
+-#"X-Poedit-Bookmarks: 221,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
++
 +msgid ""
 +msgstr ""
 +""
-+"Project-Id-Version: it-241\n"
-+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-+"POT-Creation-Date: 2006-03-27 13:42+0200\n"
-+"PO-Revision-Date: 2006-04-26 00:53+0200\n"
-+"Last-Translator: Gianluca Faletti <kino@kino3d.com>\n"
-+"Language-Team: Italian <it@li.org>\n"
++"Project-Id-Version: it-246\n"
++"POT-Creation-Date: \n"
++"PO-Revision-Date: 2008-02-29 21:39+0100\n"
++"Last-Translator: Skynet_italy <fiott@tin.it>\n"
++"Language-Team:  <it@li.org>\n"
 +"MIME-Version: 1.0\n"
 +"Content-Type: text/plain; charset=UTF-8\n"
 +"Content-Transfer-Encoding: 8bit\n"
-+"X-Generator: KBabel 1.10.2\n"
++"X-Poedit-Language: Italian\n"
++"X-Poedit-Country: ITALY\n"
++"X-Poedit-SourceCharset: utf-8\n"
++"X-Generator: KBabel 1.11.4\n"
++"X-Poedit-Bookmarks: 221,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
  
- msgid " - sys evt"
- msgstr " - sys evt"
-diff -ur blender-2.44-o/po/ja.po blender-2.44/po/ja.po
---- blender-2.44-o/po/ja.po	2004-05-27 02:00:17.000000000 -0600
-+++ blender-2.44/po/ja.po	2007-05-18 15:05:18.000000000 -0600
+ msgid "Global Undo History "
+ msgstr "Storico Globale Annulla"
+diff -urN blender-2.46/po/ja.po blender-2.46.new/po/ja.po
+--- blender-2.46/po/ja.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/ja.po	2008-05-30 22:27:57.000000000 +0200
 @@ -1,7 +1,18 @@
  # blender ja.po
  # Copyright (C) 2003 Free Software Foundation, Inc.
@@ -227,24 +210,22 @@ diff -ur blender-2.44-o/po/ja.po blender-2.44/po/ja.po
  
  ###########################################################
  ###
-diff -ur blender-2.44-o/po/Makefile blender-2.44/po/Makefile
---- blender-2.44-o/po/Makefile	2007-02-09 08:42:16.000000000 -0700
-+++ blender-2.44/po/Makefile	2007-05-18 15:05:18.000000000 -0600
-@@ -34,9 +34,9 @@
+diff -urN blender-2.46/po/Makefile blender-2.46.new/po/Makefile
+--- blender-2.46/po/Makefile	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/Makefile	2008-05-31 10:39:31.000000000 +0200
+@@ -31,7 +31,7 @@
  
  SOURCEDIR = blender/po
  
 -include nan_definitions.mk
 +include ../source/nan_definitions.mk
  
--LINGUAS = ar bg ca cs de es fr hr it ja nl pl pt_br ro ru sr sr@Latn sv uk zh_CN 
-+LINGUAS = ar bg ca cs de es fi fr hr it ja nl pl pt_BR ro ru sr sr@Latn sv uk zh_CN 
- ifeq ($(OS), darwin)
- DIR = $(OCGDIR)/bin/blender.app/Contents/Resources/locale/$@/LC_MESSAGES/
- else
-diff -ur blender-2.44-o/po/nl.po blender-2.44/po/nl.po
---- blender-2.44-o/po/nl.po	2003-05-14 09:04:27.000000000 -0600
-+++ blender-2.44/po/nl.po	2007-05-18 15:05:18.000000000 -0600
+ LINGUAS = ar bg ca cs de el es fi fr hr it ja nl pl pt_BR ro ru sr sr@Latn sv uk zh_CN
+ 
+Pliki blender-2.46/po/messages.mo i blender-2.46.new/po/messages.mo różnią się
+diff -urN blender-2.46/po/nl.po blender-2.46.new/po/nl.po
+--- blender-2.46/po/nl.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/nl.po	2008-05-30 22:28:09.000000000 +0200
 @@ -1,6 +1,17 @@
  # blender nl.po
  # Copyright (C) 2003 Free Software Foundation, Inc.
@@ -263,9 +244,9 @@ diff -ur blender-2.44-o/po/nl.po blender-2.44/po/nl.po
  
  ###########################################################
  ###
-diff -ur blender-2.44-o/po/pl.po blender-2.44/po/pl.po
---- blender-2.44-o/po/pl.po	2006-07-02 09:02:19.000000000 -0600
-+++ blender-2.44/po/pl.po	2007-05-18 15:05:18.000000000 -0600
+diff -urN blender-2.46/po/pl.po blender-2.46.new/po/pl.po
+--- blender-2.46/po/pl.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/pl.po	2008-05-30 22:28:17.000000000 +0200
 @@ -1,10 +1,15 @@
  # translation of pl.po to 
  # Piotr Kieć <pk_piotr@o2.pl>, 2004.
@@ -287,9 +268,9 @@ diff -ur blender-2.44-o/po/pl.po blender-2.44/po/pl.po
  
  
  msgid "Sets the number of samples used for AO (actual number: squared)"
-diff -ur blender-2.44-o/po/pt_br.po blender-2.44/po/pt_br.po
---- blender-2.44-o/po/pt_br.po	2004-01-26 17:39:44.000000000 -0700
-+++ blender-2.44/po/pt_br.po	2007-05-18 15:05:18.000000000 -0600
+diff -urN blender-2.46/po/pt_BR.po blender-2.46.new/po/pt_BR.po
+--- blender-2.46/po/pt_BR.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/pt_BR.po	2008-05-30 22:28:51.000000000 +0200
 @@ -1,6 +1,17 @@
  # Translation of pt_br.po to Brazilian Portuguese. Version 0.1a
  # Frank 2003
@@ -308,9 +289,9 @@ diff -ur blender-2.44-o/po/pt_br.po blender-2.44/po/pt_br.po
  
  msgid "(De)Select All"
  msgstr "(De)Selecionar Tudo"
-diff -ur blender-2.44-o/po/ru.po blender-2.44/po/ru.po
---- blender-2.44-o/po/ru.po	2007-01-11 08:49:21.000000000 -0700
-+++ blender-2.44/po/ru.po	2007-05-18 15:05:19.000000000 -0600
+diff -urN blender-2.46/po/ru.po blender-2.46.new/po/ru.po
+--- blender-2.46/po/ru.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/ru.po	2008-05-30 22:29:05.000000000 +0200
 @@ -1,15 +1,17 @@
  # Translation Russian. Version 0.2
  # Yurec yureckey@mail.ru 2004
@@ -338,9 +319,9 @@ diff -ur blender-2.44-o/po/ru.po blender-2.44/po/ru.po
  
  
  
-diff -ur blender-2.44-o/po/sr@Latn.po blender-2.44/po/sr@Latn.po
---- blender-2.44-o/po/sr@Latn.po	2006-07-02 09:02:19.000000000 -0600
-+++ blender-2.44/po/sr@Latn.po	2007-05-18 15:05:19.000000000 -0600
+diff -urN blender-2.46/po/sr@Latn.po blender-2.46.new/po/sr@Latn.po
+--- blender-2.46/po/sr@Latn.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/sr@Latn.po	2008-05-30 22:29:16.000000000 +0200
 @@ -1,14 +1,17 @@
  # Translation Serbian latin. Version 0.2 
  # Nikola Radovanovic nrad@eunet.yu 2004
@@ -367,9 +348,9 @@ diff -ur blender-2.44-o/po/sr@Latn.po blender-2.44/po/sr@Latn.po
  
  msgid "\r Radiosity step %d"
  msgstr "\r Radioziti korak %d"
-diff -ur blender-2.44-o/po/sr.po blender-2.44/po/sr.po
---- blender-2.44-o/po/sr.po	2006-07-02 09:02:19.000000000 -0600
-+++ blender-2.44/po/sr.po	2007-05-18 15:05:19.000000000 -0600
+diff -urN blender-2.46/po/sr.po blender-2.46.new/po/sr.po
+--- blender-2.46/po/sr.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/sr.po	2008-05-30 22:29:12.000000000 +0200
 @@ -1,14 +1,17 @@
  # Translation Serbian. Version 0.2
  # Nikola Radovanovic nrad@eunet.yu 2004
@@ -396,9 +377,9 @@ diff -ur blender-2.44-o/po/sr.po blender-2.44/po/sr.po
  
  msgid "\r Radiosity step %d"
  msgstr "\r Радиозити корак %d"
-diff -ur blender-2.44-o/po/sv.po blender-2.44/po/sv.po
---- blender-2.44-o/po/sv.po	2006-07-02 09:02:19.000000000 -0600
-+++ blender-2.44/po/sv.po	2007-05-18 15:05:19.000000000 -0600
+diff -urN blender-2.46/po/sv.po blender-2.46.new/po/sv.po
+--- blender-2.46/po/sv.po	2008-05-19 16:40:14.000000000 +0200
++++ blender-2.46.new/po/sv.po	2008-05-30 22:29:25.000000000 +0200
 @@ -1,16 +1,20 @@
 -# translation of sv.po to Svenska
 -# sten <ztonzy@yahoo.se>, 2003
