@@ -97,24 +97,24 @@ diff -urN blender-2.46/po/fr.po blender-2.46.new/po/fr.po
 +++ blender-2.46.new/po/fr.po	2008-05-30 22:31:41.000000000 +0200
 @@ -1,11 +1,16 @@
  # French UI Translation
- # eon <eon.2007@free.fr>, 2007
--#"Last-Translator: eon <eon.2007@free.fr>\n"
--#"PO-Revision-Date: 2007-05-07 01:00+0100\n"
+ # eon <eon.2008@free.fr>, 2008
+-#"Last-Translator: eon <eon.2008@free.fr>\n"
+-#"PO-Revision-Date: 2008-09-29 01:00+0100\n"
 -#"Content-Type: text/plain; charset=UTF-8\n"
 -#"Content-Transfer-Encoding: 8bit\n"
 -#"Language-Team: eon (eon@jabber.fr) , serialsiner , kaal / project page : http://wiki.blender.org/index.php/Interface/fr"
--#"X-Generator: Gedit 2.18.0\n"
+-#"X-Generator: Gedit 2.22.0\n"
 +msgid ""
 +msgstr ""
 +""
 +"Project-Id-Version: \n"
-+"Last-Translator: eon <eon.2007@free.fr>\n"
-+"PO-Revision-Date: 2007-05-07 01:00+0100\n"
++"Last-Translator: eon <eon.2008@free.fr>\n"
++"PO-Revision-Date: 2008-09-29 01:00+0100\n"
 +"Content-Type: text/plain; charset=UTF-8\n"
 +"Content-Transfer-Encoding: 8bit\n"
 +"Language-Team: eon (eon@jabber.fr) , serialsiner , kaal / project page : http://wiki.blender.org/index.php/Interface/fr\n"
 +"MIME-Version: 1.0\n"
-+"X-Generator: Gedit 2.18.0\n"
++"X-Generator: Gedit 2.22.0\n"
  
  # Copyright (C) 2005 Free Software Foundation, Inc.
  #
@@ -131,7 +131,7 @@ diff -urN blender-2.46/po/hr.po blender-2.46.new/po/hr.po
 -#"Last-Translator: Tomislav Čorak <tommy555@net.hr>\n"
 -#"Language-Team: \n"
 -#"MIME-Version: 1.0\n"
--#"Content-Type: text/plain; charset=utf-8\n"
+-#"Content-Type: text/plain; charset=UTF-8\n"
 -#"Content-Transfer-Encoding: 8bit\n"
 +
 +msgid ""
@@ -143,7 +143,7 @@ diff -urN blender-2.46/po/hr.po blender-2.46.new/po/hr.po
 +"Last-Translator: Tomislav Čorak <tommy555@net.hr>\n"
 +"Language-Team: \n"
 +"MIME-Version: 1.0\n"
-+"Content-Type: text/plain; charset=utf-8\n"
++"Content-Type: text/plain; charset=UTF-8\n"
 +"Content-Transfer-Encoding: 8bit\n"
  
  # #########################################################
@@ -164,7 +164,7 @@ diff -urN blender-2.46/po/it.po blender-2.46.new/po/it.po
 -#"Content-Transfer-Encoding: 8bit\n"
 -#"X-Poedit-Language: Italian\n"
 -#"X-Poedit-Country: ITALY\n"
--#"X-Poedit-SourceCharset: utf-8\n"
+-#"X-Poedit-SourceCharset: UTF-8\n"
 -#"X-Generator: KBabel 1.11.4\n"
 -#"X-Poedit-Bookmarks: 221,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 +
@@ -181,7 +181,7 @@ diff -urN blender-2.46/po/it.po blender-2.46.new/po/it.po
 +"Content-Transfer-Encoding: 8bit\n"
 +"X-Poedit-Language: Italian\n"
 +"X-Poedit-Country: ITALY\n"
-+"X-Poedit-SourceCharset: utf-8\n"
++"X-Poedit-SourceCharset: UTF-8\n"
 +"X-Generator: KBabel 1.11.4\n"
 +"X-Poedit-Bookmarks: 221,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
  
