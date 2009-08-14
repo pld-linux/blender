@@ -5,7 +5,7 @@ Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
 Version:	2.48a
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
@@ -18,16 +18,17 @@ Patch0:		%{name}-po_and_locale_names.patch
 Patch1:		%{name}-noxml-yafray.patch
 Patch2:		%{name}-ffmpeg.patch
 URL:		http://www.blender.org/
+BuildRequires:	OpenAL-devel
 BuildRequires:	OpenEXR-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
-BuildRequires:	gcc >= 5:3.4.0
+#BuildRequires:	esound-devel
 BuildRequires:	ffmpeg-devel >= 0.4.9-4.20080930.1
 BuildRequires:	freealut-devel
 BuildRequires:	freetype-devel
 BuildRequires:	ftgl-devel
+BuildRequires:	gcc >= 5:3.4.0
 BuildRequires:	gettext-devel
-#BuildRequires:	esound-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
@@ -80,7 +81,7 @@ TARGET_CXX        = '%{__cxx}'
 
 BF_PYTHON_VERSION = '%{py_ver}'
 
-BF_FFMPEG         = '/usr'
+BF_FFMPEG         = '%{_prefix}'
 BF_FFMPEG_INC     = '%{_includedir}/ffmpeg'
 BF_FFMPEG_LIBPATH = '%{_libdir}'
 BF_FFMPEG_LIB     = 'avformat avcodec swscale avutil'
