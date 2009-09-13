@@ -4,19 +4,18 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.48a
-Release:	4
+Version:	2.49b
+Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
-# Source0-md5:	055d68d244458e9e429e4e492fc9b4ad
+# Source0-md5:	718eef6a4ff377989e829b92a886cc5b
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source4:	%{name}-wrapper
 Source5:	%{name}.manpage
 Patch0:		%{name}-po_and_locale_names.patch
 Patch1:		%{name}-noxml-yafray.patch
-Patch2:		%{name}-ffmpeg.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenEXR-devel
@@ -63,7 +62,6 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p0
 
 rm -f missing
 rm -f user-config.py
@@ -84,7 +82,7 @@ BF_PYTHON_VERSION = '%{py_ver}'
 BF_FFMPEG         = '%{_prefix}'
 BF_FFMPEG_INC     = '%{_includedir}/ffmpeg'
 BF_FFMPEG_LIBPATH = '%{_libdir}'
-BF_FFMPEG_LIB     = 'avformat avcodec swscale avutil'
+BF_FFMPEG_LIB     = 'avformat avcodec avdevice swscale avutil'
 
 LCGDIR            = 'lib/linux2'
 BF_BUILDDIR       = 'build/linux2'
@@ -93,7 +91,10 @@ END
 
 %build
 %scons BF_OPENGL_LIBPATH=%{_x_libraries}
-%{__make} -C po OCGDIR=..
+%{__make} -C po \
+	OCGDIR=.. \
+	SRCHOME=$(pwd)/source \
+	NANBLENDERHOME=$(pwd)
 
 install -d release/plugins/include
 install source/blender/blenpluginapi/*.h release/plugins/include
