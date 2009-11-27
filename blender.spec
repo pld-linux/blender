@@ -40,8 +40,8 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.385
 BuildRequires:	scons
 BuildRequires:	sed >= 4.0
-BuildRequires:	xorg-lib-libXi-devel
 #BuildRequires:	smpeg-devel
+BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
 Requires:	OpenGL
@@ -70,6 +70,7 @@ rm -f user-config.py
 rm -rf bin/.blender/locale
 
 sed 's/\(BUILD_REV :=\).*/\1 unknown/' -i source/Makefile
+sed 's/\(build_rev =\).*/\1 "unknown"/' -i tools/Blender.py
 
 RPMCFLAGS="\"`echo %{rpmcflags}|sed 's/ /\",\"/g'`\""
 RPMLDFLAGS="\"`echo %{rpmldflags}|sed 's/ /\",\"/g'`\""
