@@ -36,9 +36,11 @@ BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	python-devel >= 1:2.3
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.385
 BuildRequires:	scons
 BuildRequires:	sed >= 4.0
+BuildRequires:	xorg-lib-libXi-devel
 #BuildRequires:	smpeg-devel
 BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
@@ -66,6 +68,8 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 rm -f missing
 rm -f user-config.py
 rm -rf bin/.blender/locale
+
+sed 's/\(BUILD_REV :=\).*/\1 unknown/' -i source/Makefile
 
 RPMCFLAGS="\"`echo %{rpmcflags}|sed 's/ /\",\"/g'`\""
 RPMLDFLAGS="\"`echo %{rpmldflags}|sed 's/ /\",\"/g'`\""
