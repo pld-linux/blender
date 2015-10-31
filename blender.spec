@@ -13,12 +13,14 @@ Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}.manpage
-Patch0:		blender-2.76-droid.patch
+Patch0:		%{name}-2.76-droid.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenEXR-devel
 BuildRequires:	OpenGL-devel
+BuildRequires:	OpenImageIO-devel
 BuildRequires:	SDL2-devel
+BuildRequires:	cmake
 #BuildRequires:	esound-devel
 BuildRequires:	ffmpeg-devel >= 0.4.9-4.20080930.1
 BuildRequires:	freealut-devel
@@ -36,7 +38,6 @@ BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	python3-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.385
-BuildRequires:	cmake
 BuildRequires:	sed >= 4.0
 #BuildRequires:	smpeg-devel
 BuildRequires:	xorg-lib-libXi-devel
@@ -103,9 +104,9 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_mandir}/man1}
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE3} $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -p %{SOURCE3} $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
 
 #%find_lang %{name}
 
@@ -119,8 +120,8 @@ rm -rf $RPM_BUILD_ROOT
 %update_desktop_database_postun
 
 %files
-# -f %{name}.lang
 %defattr(644,root,root,755)
+# -f %{name}.lang
 %doc doc/license/bf-members.txt doc/guides/*.txt
 %attr(755,root,root) %{_bindir}/blender
 %attr(755,root,root) %{_bindir}/blender-thumbnailer.py
