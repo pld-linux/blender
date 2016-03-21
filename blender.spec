@@ -14,6 +14,8 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}.manpage
 Patch0:		%{name}-2.76-droid.patch
+Patch1:		x32.patch
+Patch2:		ffmpeg3.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenEXR-devel
@@ -62,6 +64,8 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 install -d build
