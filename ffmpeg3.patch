@@ -1,5 +1,18 @@
---- blender-2.76/intern/audaspace/ffmpeg/AUD_FFMPEGReader.cpp~	2015-10-07 02:09:33.000000000 +0200
-+++ blender-2.76/intern/audaspace/ffmpeg/AUD_FFMPEGReader.cpp	2016-03-21 12:54:10.943584079 +0100
+diff -ur blender-2.76/CMakeLists.txt blender-2.76.ffmpeg/CMakeLists.txt
+--- blender-2.76/CMakeLists.txt	2015-10-12 00:58:22.000000000 +0200
++++ blender-2.76.ffmpeg/CMakeLists.txt	2016-04-16 15:31:11.524037254 +0200
+@@ -982,7 +982,7 @@
+ 
+ 	if(WITH_CODEC_FFMPEG)
+ 		set(FFMPEG /usr CACHE PATH "FFMPEG Directory")
+-		set(FFMPEG_LIBRARIES avformat avcodec avutil avdevice swscale CACHE STRING "FFMPEG Libraries")
++		set(FFMPEG_LIBRARIES avformat avcodec avutil avdevice swscale avfilter CACHE STRING "FFMPEG Libraries")
+ 
+ 		mark_as_advanced(FFMPEG)
+ 
+diff -ur blender-2.76/intern/audaspace/ffmpeg/AUD_FFMPEGReader.cpp blender-2.76.ffmpeg/intern/audaspace/ffmpeg/AUD_FFMPEGReader.cpp
+--- blender-2.76/intern/audaspace/ffmpeg/AUD_FFMPEGReader.cpp	2015-10-07 02:09:33.000000000 +0200
++++ blender-2.76.ffmpeg/intern/audaspace/ffmpeg/AUD_FFMPEGReader.cpp	2016-04-16 15:31:11.524037254 +0200
 @@ -58,9 +58,9 @@
  		got_frame = 0;
  
@@ -12,8 +25,9 @@
  
  		read_length = avcodec_decode_audio4(m_codecCtx, frame, &got_frame, &packet);
  		if(read_length < 0)
---- blender-2.76/intern/audaspace/ffmpeg/AUD_FFMPEGWriter.cpp~	2015-10-07 02:09:33.000000000 +0200
-+++ blender-2.76/intern/audaspace/ffmpeg/AUD_FFMPEGWriter.cpp	2016-03-21 12:54:54.334128942 +0100
+diff -ur blender-2.76/intern/audaspace/ffmpeg/AUD_FFMPEGWriter.cpp blender-2.76.ffmpeg/intern/audaspace/ffmpeg/AUD_FFMPEGWriter.cpp
+--- blender-2.76/intern/audaspace/ffmpeg/AUD_FFMPEGWriter.cpp	2015-10-07 02:09:33.000000000 +0200
++++ blender-2.76.ffmpeg/intern/audaspace/ffmpeg/AUD_FFMPEGWriter.cpp	2016-04-16 15:31:11.524037254 +0200
 @@ -202,7 +202,7 @@
  			m_frame = av_frame_alloc();
  			if (!m_frame)
@@ -23,8 +37,9 @@
  			m_frame->linesize[0]    = m_input_size * samplesize;
  			m_frame->format         = m_codecCtx->sample_fmt;
  			m_frame->nb_samples     = m_input_size;
---- blender-2.76/source/blender/blenkernel/intern/writeffmpeg.c.orig	2016-03-21 13:17:27.104210256 +0100
-+++ blender-2.76/source/blender/blenkernel/intern/writeffmpeg.c	2016-03-21 13:19:51.459372230 +0100
+diff -ur blender-2.76/source/blender/blenkernel/intern/writeffmpeg.c blender-2.76.ffmpeg/source/blender/blenkernel/intern/writeffmpeg.c
+--- blender-2.76/source/blender/blenkernel/intern/writeffmpeg.c	2015-10-12 00:58:22.000000000 +0200
++++ blender-2.76.ffmpeg/source/blender/blenkernel/intern/writeffmpeg.c	2016-04-16 15:31:11.527370628 +0200
 @@ -138,8 +138,8 @@
  	context->audio_time += (double) context->audio_input_samples / (double) c->sample_rate;
  
@@ -156,9 +171,21 @@
  	                                 NULL, NULL, NULL);
  	return st;
  }
---- blender-2.76/source/blender/imbuf/intern/anim_movie.c.orig	2016-03-21 13:22:18.224607392 +0100
-+++ blender-2.76/source/blender/imbuf/intern/anim_movie.c	2016-03-21 13:34:53.607491392 +0100
-@@ -562,12 +562,12 @@
+diff -ur blender-2.76/source/blender/imbuf/intern/anim_movie.c blender-2.76.ffmpeg/source/blender/imbuf/intern/anim_movie.c
+--- blender-2.76/source/blender/imbuf/intern/anim_movie.c	2015-10-07 02:09:33.000000000 +0200
++++ blender-2.76.ffmpeg/source/blender/imbuf/intern/anim_movie.c	2016-04-16 15:31:11.527370628 +0200
+@@ -474,6 +474,10 @@
+ 	const int *inv_table;
+ #endif
+ 
++	anim->last_width = -1;
++	anim->last_height = -1;
++	anim->last_pixfmt = AV_PIX_FMT_NONE;
++
+ 	if (anim == NULL) return(-1);
+ 
+ 	streamcount = anim->streamindex;
+@@ -562,21 +566,21 @@
  	anim->next_pts = -1;
  	anim->next_packet.stream_index = -1;
  
@@ -175,7 +202,19 @@
  	    anim->x * anim->y * 4)
  	{
  		fprintf(stderr,
-@@ -606,7 +606,7 @@
+ 		        "ffmpeg has changed alloc scheme ... ARGHHH!\n");
+ 		avcodec_close(anim->pCodecCtx);
+ 		avformat_close_input(&anim->pFormatCtx);
+-		av_free(anim->pFrameRGB);
+-		av_free(anim->pFrameDeinterlaced);
+-		av_free(anim->pFrame);
++		av_frame_free(&anim->pFrameRGB);
++		av_frame_free(&anim->pFrameDeinterlaced);
++		av_frame_free(&anim->pFrame);
+ 		anim->pCodecCtx = NULL;
+ 		return -1;
+ 	}
+@@ -606,7 +610,7 @@
  	        anim->pCodecCtx->pix_fmt,
  	        anim->x,
  	        anim->y,
@@ -184,7 +223,105 @@
  	        SWS_FAST_BILINEAR | SWS_PRINT_INFO | SWS_FULL_CHR_H_INT,
  	        NULL, NULL, NULL);
  		
-@@ -692,7 +692,7 @@
+@@ -615,9 +619,9 @@
+ 		        "Can't transform color space??? Bailing out...\n");
+ 		avcodec_close(anim->pCodecCtx);
+ 		avformat_close_input(&anim->pFormatCtx);
+-		av_free(anim->pFrameRGB);
+-		av_free(anim->pFrameDeinterlaced);
+-		av_free(anim->pFrame);
++		av_frame_free(&anim->pFrameRGB);
++		av_frame_free(&anim->pFrameDeinterlaced);
++		av_frame_free(&anim->pFrame);
+ 		anim->pCodecCtx = NULL;
+ 		return -1;
+ 	}
+@@ -644,6 +648,74 @@
+ 	return (0);
+ }
+ 
++static void delete_filter_graph(struct anim *anim) {
++    if (anim->filter_graph) {
++        av_frame_free(&anim->filter_frame);
++        avfilter_graph_free(&anim->filter_graph);
++    }
++}
++
++static int init_filter_graph(struct anim *anim, enum AVPixelFormat pixfmt, int width, int height) {
++    AVFilterInOut *inputs = NULL, *outputs = NULL;
++    char args[512];
++    int res;
++
++    delete_filter_graph(anim);
++    anim->filter_graph = avfilter_graph_alloc();
++    snprintf(args, sizeof(args),
++             "buffer=video_size=%dx%d:pix_fmt=%d:time_base=1/1:pixel_aspect=0/1[in];"
++             "[in]yadif[out];"
++             "[out]buffersink",
++             width, height, pixfmt);
++    res = avfilter_graph_parse2(anim->filter_graph, args, &inputs, &outputs);
++    if (res < 0)
++        return res;
++    if(inputs || outputs)
++        return -1;
++    res = avfilter_graph_config(anim->filter_graph, NULL);
++    if (res < 0)
++        return res;
++
++    anim->buffersrc_ctx = avfilter_graph_get_filter(anim->filter_graph, "Parsed_buffer_0");
++    anim->buffersink_ctx = avfilter_graph_get_filter(anim->filter_graph, "Parsed_buffersink_2");
++    if (!anim->buffersrc_ctx || !anim->buffersink_ctx)
++        return -1;
++    anim->filter_frame = av_frame_alloc();
++    anim->last_width = width;
++    anim->last_height = height;
++    anim->last_pixfmt = pixfmt;
++
++    return 0;
++}
++
++static int process_filter_graph(struct anim *anim, AVPicture *dst, const AVPicture *src,
++                                enum AVPixelFormat pixfmt, int width, int height) {
++    int res;
++
++    if (!anim->filter_graph || width != anim->last_width ||
++        height != anim->last_height || pixfmt != anim->last_pixfmt) {
++        res = init_filter_graph(anim, pixfmt, width, height);
++        if (res < 0)
++            return res;
++    }
++
++    memcpy(anim->filter_frame->data, src->data, sizeof(src->data));
++    memcpy(anim->filter_frame->linesize, src->linesize, sizeof(src->linesize));
++    anim->filter_frame->width = width;
++    anim->filter_frame->height = height;
++    anim->filter_frame->format = pixfmt;
++    res = av_buffersrc_add_frame(anim->buffersrc_ctx, anim->filter_frame);
++    if (res < 0)
++        return res;
++    res = av_buffersink_get_frame(anim->buffersink_ctx, anim->filter_frame);
++    if (res < 0)
++        return res;
++    av_picture_copy(dst, (const AVPicture *) anim->filter_frame, pixfmt, width, height);
++    av_frame_unref(anim->filter_frame);
++
++    return 0;
++}
++
+ /* postprocess the image in anim->pFrame and do color conversion
+  * and deinterlacing stuff.
+  *
+@@ -677,7 +749,8 @@
+ 
+ 
+ 	if (anim->ib_flags & IB_animdeinterlace) {
+-		if (avpicture_deinterlace(
++		if (process_filter_graph(
++		        anim,
+ 		        (AVPicture *)
+ 		        anim->pFrameDeinterlaced,
+ 		        (const AVPicture *)
+@@ -695,7 +768,7 @@
  	
  	avpicture_fill((AVPicture *) anim->pFrameRGB,
  	               (unsigned char *) ibuf->rect,
@@ -193,8 +330,59 @@
  
  	if (ENDIAN_ORDER == B_ENDIAN) {
  		int *dstStride   = anim->pFrameRGB->linesize;
---- blender-2.76/source/blender/imbuf/intern/indexer.c~	2015-10-07 02:09:33.000000000 +0200
-+++ blender-2.76/source/blender/imbuf/intern/indexer.c	2016-03-21 13:36:25.235302331 +0100
+@@ -1138,16 +1211,18 @@
+ {
+ 	if (anim == NULL) return;
+ 
++	delete_filter_graph(anim);
++
+ 	if (anim->pCodecCtx) {
+ 		avcodec_close(anim->pCodecCtx);
+ 		avformat_close_input(&anim->pFormatCtx);
+-		av_free(anim->pFrameRGB);
+-		av_free(anim->pFrame);
++		av_frame_free(&anim->pFrameRGB);
++		av_frame_free(&anim->pFrame);
+ 
+ 		if (anim->ib_flags & IB_animdeinterlace) {
+ 			MEM_freeN(anim->pFrameDeinterlaced->data[0]);
+ 		}
+-		av_free(anim->pFrameDeinterlaced);
++		av_frame_free(&anim->pFrameDeinterlaced);
+ 		sws_freeContext(anim->img_convert_ctx);
+ 		IMB_freeImBuf(anim->last_frame);
+ 		if (anim->next_packet.stream_index != -1) {
+diff -ur blender-2.76/source/blender/imbuf/intern/IMB_anim.h blender-2.76.ffmpeg/source/blender/imbuf/intern/IMB_anim.h
+--- blender-2.76/source/blender/imbuf/intern/IMB_anim.h	2015-10-07 02:09:33.000000000 +0200
++++ blender-2.76.ffmpeg/source/blender/imbuf/intern/IMB_anim.h	2016-04-16 15:31:11.527370628 +0200
+@@ -76,6 +76,9 @@
+ #  include <libavformat/avformat.h>
+ #  include <libavcodec/avcodec.h>
+ #  include <libswscale/swscale.h>
++#  include <libavfilter/avfilter.h>
++#  include <libavfilter/buffersrc.h>
++#  include <libavfilter/buffersink.h>
+ #endif
+ 
+ #ifdef WITH_REDCODE
+@@ -175,6 +178,14 @@
+ 	int64_t last_pts;
+ 	int64_t next_pts;
+ 	AVPacket next_packet;
++
++	AVFilterContext *buffersink_ctx;
++	AVFilterContext *buffersrc_ctx;
++	AVFilterGraph *filter_graph;
++	AVFrame *filter_frame;
++	int last_width;
++	int last_height;
++	enum AVPixelFormat last_pixfmt;
+ #endif
+ 
+ #ifdef WITH_REDCODE
+diff -ur blender-2.76/source/blender/imbuf/intern/indexer.c blender-2.76.ffmpeg/source/blender/imbuf/intern/indexer.c
+--- blender-2.76/source/blender/imbuf/intern/indexer.c	2015-10-07 02:09:33.000000000 +0200
++++ blender-2.76.ffmpeg/source/blender/imbuf/intern/indexer.c	2016-04-16 15:31:11.527370628 +0200
 @@ -519,7 +519,7 @@
  		rv->c->pix_fmt = rv->codec->pix_fmts[0];
  	}
@@ -213,6 +401,15 @@
  		avpicture_fill((AVPicture *) rv->frame,
  		               MEM_mallocN(avpicture_get_size(
  		                               rv->c->pix_fmt,
+@@ -675,7 +675,7 @@
+ 		sws_freeContext(ctx->sws_ctx);
+ 
+ 		MEM_freeN(ctx->frame->data[0]);
+-		av_free(ctx->frame);
++		av_frame_free(&ctx->frame);
+ 	}
+ 
+ 	get_proxy_filename(ctx->anim, ctx->proxy_size, 
 @@ -905,7 +905,7 @@
  
  	memset(&next_packet, 0, sizeof(AVPacket));
@@ -222,9 +419,36 @@
  
  	stream_size = avio_size(context->iFormatCtx->pb);
  
---- blender-2.76/source/gameengine/VideoTexture/VideoFFmpeg.cpp~	2015-10-12 00:58:22.000000000 +0200
-+++ blender-2.76/source/gameengine/VideoTexture/VideoFFmpeg.cpp	2016-03-21 13:38:33.813572152 +0100
-@@ -140,23 +140,23 @@
+@@ -973,7 +973,7 @@
+ 		} while (frame_finished);
+ 	}
+ 
+-	av_free(in_frame);
++	av_frame_free(&in_frame);
+ 
+ 	return 1;
+ }
+diff -ur blender-2.76/source/gameengine/VideoTexture/VideoFFmpeg.cpp blender-2.76.ffmpeg/source/gameengine/VideoTexture/VideoFFmpeg.cpp
+--- blender-2.76/source/gameengine/VideoTexture/VideoFFmpeg.cpp	2015-10-12 00:58:22.000000000 +0200
++++ blender-2.76.ffmpeg/source/gameengine/VideoTexture/VideoFFmpeg.cpp	2016-04-16 15:31:11.527370628 +0200
+@@ -79,11 +79,16 @@
+ 	BLI_listbase_clear(&m_frameCacheBase);
+ 	BLI_listbase_clear(&m_packetCacheFree);
+ 	BLI_listbase_clear(&m_packetCacheBase);
++	last_width = -1;
++	last_height = -1;
++	last_pixfmt = AV_PIX_FMT_NONE;
++
+ }
+ 
+ // destructor
+ VideoFFmpeg::~VideoFFmpeg () 
+ {
++	delete_filter_graph(this);
+ }
+ 
+ void VideoFFmpeg::refresh(void)
+@@ -140,23 +145,23 @@
  AVFrame	*VideoFFmpeg::allocFrameRGB()
  {
  	AVFrame *frame;
@@ -253,7 +477,7 @@
  	}
  	return frame;
  }
-@@ -236,8 +236,8 @@
+@@ -236,8 +241,8 @@
  	m_codecCtx = codecCtx;
  	m_formatCtx = formatCtx;
  	m_videoStream = videoStream;
@@ -264,7 +488,7 @@
  
  	// allocate buffer if deinterlacing is required
  	avpicture_fill((AVPicture*)m_frameDeinterlaced, 
-@@ -248,10 +248,10 @@
+@@ -248,10 +253,10 @@
  		m_codecCtx->pix_fmt, m_codecCtx->width, m_codecCtx->height);
  
  	// check if the pixel format supports Alpha
@@ -279,7 +503,7 @@
  	{
  		// allocate buffer to store final decoded frame
  		m_format = RGBA32;
-@@ -262,7 +262,7 @@
+@@ -262,7 +267,7 @@
  			m_codecCtx->pix_fmt,
  			m_codecCtx->width,
  			m_codecCtx->height,
@@ -288,7 +512,7 @@
  			SWS_FAST_BILINEAR,
  			NULL, NULL, NULL);
  	} else
-@@ -276,7 +276,7 @@
+@@ -276,7 +281,7 @@
  			m_codecCtx->pix_fmt,
  			m_codecCtx->width,
  			m_codecCtx->height,
@@ -297,3 +521,153 @@
  			SWS_FAST_BILINEAR,
  			NULL, NULL, NULL);
  	}
+@@ -293,13 +298,81 @@
+ 		av_free(m_frameDeinterlaced);
+ 		m_frameDeinterlaced = NULL;
+ 		MEM_freeN(m_frameRGB->data[0]);
+-		av_free(m_frameRGB);
++		av_frame_free(&m_frameRGB);
+ 		m_frameRGB = NULL;
+ 		return -1;
+ 	}
+ 	return 0;
+ }
+ 
++void VideoFFmpeg::delete_filter_graph(VideoFFmpeg* video) {
++    if (video->filter_graph) {
++        av_frame_free(&video->filter_frame);
++        avfilter_graph_free(&video->filter_graph);
++    }
++}
++
++int VideoFFmpeg::init_filter_graph(VideoFFmpeg* video, enum AVPixelFormat pixfmt, int width, int height) {
++    AVFilterInOut *inputs = NULL, *outputs = NULL;
++    char args[512];
++    int res;
++
++    delete_filter_graph(video);
++    video->filter_graph = avfilter_graph_alloc();
++    snprintf(args, sizeof(args),
++             "buffer=video_size=%dx%d:pix_fmt=%d:time_base=1/1:pixel_aspect=0/1[in];"
++             "[in]yadif[out];"
++             "[out]buffersink",
++             width, height, pixfmt);
++    res = avfilter_graph_parse2(video->filter_graph, args, &inputs, &outputs);
++    if (res < 0)
++        return res;
++    if(inputs || outputs)
++        return -1;
++    res = avfilter_graph_config(video->filter_graph, NULL);
++    if (res < 0)
++        return res;
++
++    video->buffersrc_ctx = avfilter_graph_get_filter(video->filter_graph, "Parsed_buffer_0");
++    video->buffersink_ctx = avfilter_graph_get_filter(video->filter_graph, "Parsed_buffersink_2");
++    if (!video->buffersrc_ctx || !video->buffersink_ctx)
++        return -1;
++    video->filter_frame = av_frame_alloc();
++    video->last_width = width;
++    video->last_height = height;
++    video->last_pixfmt = pixfmt;
++
++    return 0;
++}
++
++int VideoFFmpeg::process_filter_graph(VideoFFmpeg* video, AVPicture *dst, const AVPicture *src,
++                                      enum AVPixelFormat pixfmt, int width, int height) {
++    int res;
++
++    if (!video->filter_graph || width != video->last_width ||
++        height != video->last_height || pixfmt != video->last_pixfmt) {
++        res = init_filter_graph(video, pixfmt, width, height);
++        if (res < 0)
++            return res;
++    }
++
++    memcpy(video->filter_frame->data, src->data, sizeof(src->data));
++    memcpy(video->filter_frame->linesize, src->linesize, sizeof(src->linesize));
++    video->filter_frame->width = width;
++    video->filter_frame->height = height;
++    video->filter_frame->format = pixfmt;
++    res = av_buffersrc_add_frame(video->buffersrc_ctx, video->filter_frame);
++    if (res < 0)
++        return res;
++    res = av_buffersink_get_frame(video->buffersink_ctx, video->filter_frame);
++    if (res < 0)
++        return res;
++    av_picture_copy(dst, (const AVPicture *) video->filter_frame, pixfmt, width, height);
++    av_frame_unref(video->filter_frame);
++
++    return 0;
++}
++
+ /*
+  * This thread is used to load video frame asynchronously.
+  * It provides a frame caching service. 
+@@ -392,7 +465,7 @@
+ 					{
+ 						if (video->m_deinterlace) 
+ 						{
+-							if (avpicture_deinterlace(
++							if (process_filter_graph(video,
+ 								(AVPicture*) video->m_frameDeinterlaced,
+ 								(const AVPicture*) video->m_frame,
+ 								video->m_codecCtx->pix_fmt,
+@@ -486,14 +559,14 @@
+ 		{
+ 			BLI_remlink(&m_frameCacheBase, frame);
+ 			MEM_freeN(frame->frame->data[0]);
+-			av_free(frame->frame);
++			av_frame_free(&frame->frame);
+ 			delete frame;
+ 		}
+ 		while ((frame = (CacheFrame *)m_frameCacheFree.first) != NULL)
+ 		{
+ 			BLI_remlink(&m_frameCacheFree, frame);
+ 			MEM_freeN(frame->frame->data[0]);
+-			av_free(frame->frame);
++			av_frame_free(&frame->frame);
+ 			delete frame;
+ 		}
+ 		while ((packet = (CachePacket *)m_packetCacheBase.first) != NULL)
+@@ -1057,7 +1130,7 @@
+ 
+ 				if (m_deinterlace) 
+ 				{
+-					if (avpicture_deinterlace(
++					if (process_filter_graph(this,
+ 						(AVPicture*) m_frameDeinterlaced,
+ 						(const AVPicture*) m_frame,
+ 						m_codecCtx->pix_fmt,
+diff -ur blender-2.76/source/gameengine/VideoTexture/VideoFFmpeg.h blender-2.76.ffmpeg/source/gameengine/VideoTexture/VideoFFmpeg.h
+--- blender-2.76/source/gameengine/VideoTexture/VideoFFmpeg.h	2015-10-10 10:20:56.000000000 +0200
++++ blender-2.76.ffmpeg/source/gameengine/VideoTexture/VideoFFmpeg.h	2016-04-16 15:31:11.527370628 +0200
+@@ -39,6 +39,9 @@
+ extern "C" {
+ #include <pthread.h>
+ #include "ffmpeg_compat.h"
++#include <libavfilter/avfilter.h>
++#include <libavfilter/buffersrc.h>
++#include <libavfilter/buffersink.h>
+ #include "DNA_listBase.h"
+ #include "BLI_threads.h"
+ #include "BLI_blenlib.h"
+@@ -207,6 +210,18 @@
+ 
+ 	AVFrame	*allocFrameRGB();
+ 	static void *cacheThread(void *);
++
++	AVFilterContext *buffersink_ctx;
++	AVFilterContext *buffersrc_ctx;
++	AVFilterGraph *filter_graph;
++	AVFrame *filter_frame;
++	int last_width;
++	int last_height;
++	enum AVPixelFormat last_pixfmt;
++
++	static void delete_filter_graph(VideoFFmpeg* video);
++	static int init_filter_graph(VideoFFmpeg* video, enum AVPixelFormat pixfmt, int width, int height);
++	static int process_filter_graph(VideoFFmpeg* video, AVPicture *dst, const AVPicture *src, enum AVPixelFormat pixfmt, int width, int height);
+ };
+ 
+ inline VideoFFmpeg *getFFmpeg(PyImage *self)
