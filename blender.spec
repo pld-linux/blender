@@ -4,18 +4,16 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.76
-Release:	10
+Version:	2.78b
+Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
-# Source0-md5:	1f35ae56bb221bbeb21e89501fbd6c6a
+# Source0-md5:	336d48dba72b1c7b177733e5b7f3839c
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}.manpage
 Patch0:		%{name}-2.76-droid.patch
-Patch1:		x32.patch
-Patch2:		ffmpeg3.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenEXR-devel
@@ -64,8 +62,6 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 install -d build
