@@ -5,7 +5,7 @@ Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
 Version:	2.79b
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
@@ -15,6 +15,7 @@ Source2:	%{name}.png
 Source3:	%{name}.manpage
 Patch0:		%{name}-2.76-droid.patch
 Patch1:		ffmpeg4.patch
+Patch2:		gcc8.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenEXR-devel
@@ -64,6 +65,7 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 install -d build
