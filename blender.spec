@@ -4,45 +4,50 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.79b
-Release:	4
+Version:	2.80
+Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
-# Source0-md5:	cef9a203857dc65076e05c41fc7a7d03
-Source1:	%{name}.desktop
-Source2:	%{name}.png
-Source3:	%{name}.manpage
+# Source0-md5:	30dedaf688741d0d5d6fa1e3c331610c
 Patch0:		%{name}-2.76-droid.patch
-Patch1:		ffmpeg4.patch
-Patch2:		gcc8.patch
-Patch3:		oiio2.patch
+Patch1:		format-security.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
+BuildRequires:	OpenColorIO-devel
 BuildRequires:	OpenEXR-devel
 BuildRequires:	OpenGL-devel
+BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenImageIO-devel
 BuildRequires:	SDL2-devel
+BuildRequires:	boost-devel
 BuildRequires:	cmake
-#BuildRequires:	esound-devel
 BuildRequires:	ffmpeg-devel >= 0.4.9-4.20080930.1
+BuildRequires:	fftw3-devel
 BuildRequires:	freealut-devel
 BuildRequires:	freetype-devel
 BuildRequires:	ftgl-devel
 BuildRequires:	gcc >= 5:3.4.0
 BuildRequires:	gettext-tools
+BuildRequires:	glew-devel
+BuildRequires:	jack-audio-connection-kit-devel
+BuildRequires:	jemalloc-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
+BuildRequires:	libsndfile-devel
+BuildRequires:	libspnav-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
+BuildRequires:	openjpeg2-devel
 BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	python3
 BuildRequires:	python3-devel
+BuildRequires:	python3-numpy-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.385
 BuildRequires:	sed >= 4.0
-#BuildRequires:	smpeg-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
@@ -66,20 +71,20 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %build
 install -d build
 cd build
 %cmake \
-	-DCMAKE_SKIP_RPATH=ON \
-	-DBUILD_SHARED_LIBS=OFF \
+	-DCMAKE_SKIP_RPATH:BOOL=ON \
+	-DBUILD_SHARED_LIBS:BOOL=OFF \
 	-DWITH_FFTW3:BOOL=ON \
 	-DWITH_JACK:BOOL=ON \
+	-DWITH_JACK_DYNLOAD:BOOL=ON \
 	-DWITH_CODEC_SNDFILE:BOOL=ON \
 	-DWITH_IMAGE_OPENJPEG:BOOL=ON \
 	-DWITH_OPENCOLLADA:BOOL=ON \
+	-DWITH_OPENCOLORIO:BOOL=ON \
 	-DWITH_CYCLES:BOOL=ON \
 	-DWITH_FFTW3:BOOL=ON \
 	-DWITH_MOD_OCEANSIM:BOOL=ON \
@@ -90,14 +95,15 @@ cd build
 	-DWITH_CODEC_FFMPEG:BOOL=ON \
 	-DWITH_GAMEENGINE:BOOL=ON \
 	-DWITH_CXX_GUARDEDALLOC:BOOL=OFF \
-	-DWITH_BUILTIN_GLEW=OFF \
-	-DWITH_INSTALL_PORTABLE=OFF \
-	-DWITH_PYTHON_SAFETY=ON \
-	-DWITH_PLAYER=ON \
-	-DWITH_MEM_JEMALLOC=ON \
+	-DWITH_INSTALL_PORTABLE:BOOL=OFF \
+	-DWITH_PYTHON_SAFETY:BOOL=ON \
+	-DWITH_PLAYER:BOOL=ON \
+	-DWITH_MEM_JEMALLOC:BOOL=ON \
+	-DWITH_SYSTEM_GLEW:BOOL=ON \
 	-DBOOST_ROOT=%{_prefix} \
-	-DWITH_INPUT_NDOF=ON \
+	-DWITH_INPUT_NDOF:BOOL=ON \
 	-DWITH_SDL:BOOL=ON \
+	-DWITH_SDL_DYNLOAD:BOOL=ON \
 	..
 
 %{__make} V=1
@@ -110,9 +116,7 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_mandir}/man1}
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
-cp -p %{SOURCE3} $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
+./doc/manpage/blender.1.py $RPM_BUILD_ROOT%{_bindir}/blender $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
 
 #%find_lang %{name}
 
@@ -131,10 +135,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc/license/bf-members.txt doc/guides/*.txt
 %attr(755,root,root) %{_bindir}/blender
 %attr(755,root,root) %{_bindir}/blender-thumbnailer.py
-%attr(755,root,root) %{_bindir}/blenderplayer
 %attr(755,root,root) %{_datadir}/%{name}
 %{_desktopdir}/*.desktop
-%{_pixmapsdir}/*.png
-%{_iconsdir}/*/*x*/apps/blender.png
-%{_iconsdir}/*/scalable/apps/blender.svg
+%{_iconsdir}/hicolor/scalable/apps/blender.svg
+%{_iconsdir}/hicolor/symbolic/apps/blender-symbolic.svg
 %{_mandir}/man1/*
