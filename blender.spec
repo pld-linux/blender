@@ -5,13 +5,14 @@ Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
 Version:	2.80
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.gz
 # Source0-md5:	30dedaf688741d0d5d6fa1e3c331610c
 Patch0:		%{name}-2.76-droid.patch
 Patch1:		format-security.patch
+Patch2:		python-3.8.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenColorIO-devel
@@ -42,6 +43,7 @@ BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	openjpeg2-devel
 BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	pugixml-devel
 BuildRequires:	python3
 BuildRequires:	python3-devel
 BuildRequires:	python3-numpy-devel
@@ -71,6 +73,7 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 install -d build
