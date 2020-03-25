@@ -4,15 +4,14 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.81a
-Release:	2
+Version:	2.82a
+Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.xz
-# Source0-md5:	fd106a2c3debfd215617d31197883173
+# Source0-md5:	3e9d669185b83d5d2cb1b38dcf64d5ec
 Patch0:		%{name}-2.76-droid.patch
 Patch1:		format-security.patch
-Patch2:		python-3.8.patch
 Patch3:		struct-alignment.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
@@ -56,7 +55,7 @@ BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
 Requires:	OpenGL
 Requires:	freetype
-Requires:	python-modules
+Requires:	python3-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
@@ -74,10 +73,19 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 %ifarch x32
 %patch3 -p1
 %endif
+
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python(\s|$),#!%{__python3}\1,' -e '1s,#!\s*/usr/bin/env\s+python3(\s|$),#!%{__python3}\1,' \
+      release/bin/blender-thumbnailer.py \
+      release/scripts/addons/io_curve_svg/svg_util_test.py \
+      release/scripts/addons/io_scene_fbx/fbx2json.py \
+      release/scripts/addons/io_scene_fbx/json2fbx.py \
+      release/scripts/addons/sun_position/geo.py \
+      release/scripts/modules/bl_i18n_utils/merge_po.py \
+      release/scripts/modules/bl_i18n_utils/utils_rtl.py \
+      release/scripts/modules/blend_render_info.py
 
 %build
 install -d build
