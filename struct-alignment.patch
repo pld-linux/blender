@@ -14,7 +14,7 @@
    float curvature_valley_factor;
  
    struct IDProperty *prop;
-+  void *_pad2;
++  void *_pad99;
  } View3DShading;
  
  /** 3D Viewport Overlay settings. */
