@@ -1,12 +1,11 @@
-diff -uNr blender-2.76.orig/source/blender/blenfont/intern/blf_font_i18n.c blender-2.76/source/blender/blenfont/intern/blf_font_i18n.c
---- blender-2.76.orig/source/blender/blenfont/intern/blf_font_i18n.c	2015-10-10 10:20:56.000000000 +0200
-+++ blender-2.76/source/blender/blenfont/intern/blf_font_i18n.c	2015-10-12 16:40:42.225473358 +0200
-@@ -57,7 +57,7 @@
+--- blender-2.83.12/source/blender/blenfont/intern/blf_font_default.c~	2021-01-15 15:25:53.000000000 +0100
++++ blender-2.83.12/source/blender/blenfont/intern/blf_font_default.c	2021-03-06 19:32:29.170479890 +0100
+@@ -33,7 +33,7 @@
  
- static void fontbuf_load(struct FontBuf *fb)
+ static int blf_load_font_default(const char *filename, const bool unique)
  {
--  const char *fontpath = BKE_appdir_folder_id(BLENDER_DATAFILES, "fonts");
-+  const char *fontpath = "/usr/share/fonts/blender";
-   if (fontpath) {
-     char unifont_path[1024];
-     BLI_snprintf(unifont_path, sizeof(unifont_path), "%s/%s", fontpath, fb->filename);
+-  const char *dir = BKE_appdir_folder_id(BLENDER_DATAFILES, "fonts");
++  const char *dir = "/usr/share/fonts/blender";
+   if (dir == NULL) {
+     fprintf(stderr,
+             "%s: 'fonts' data path not found for '%s', will not be able to display text\n",
