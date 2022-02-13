@@ -4,15 +4,16 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	2.83.12
-Release:	4
+Version:	3.0.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	http://download.blender.org/source/%{name}-%{version}.tar.xz
-# Source0-md5:	6c890dfb3599bffed5edc05d43f61506
+# Source0-md5:	41cccf2fe68b9b307204e9b9b2278b0c
 Patch0:		%{name}-2.76-droid.patch
 Patch1:		format-security.patch
-Patch2:		0006-fix_FTBFS_with_python3.9.patch
+Patch2:		oiio-2.3.patch
+Patch3:		openexr3.patch
 URL:		http://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenColorIO-devel
@@ -23,6 +24,7 @@ BuildRequires:	OpenImageIO-devel
 BuildRequires:	SDL2-devel
 BuildRequires:	boost-devel
 BuildRequires:	cmake
+BuildRequires:	embree-devel
 BuildRequires:	ffmpeg-devel >= 0.4.9-4.20080930.1
 BuildRequires:	fftw3-devel
 BuildRequires:	freealut-devel
@@ -56,6 +58,7 @@ Requires(post,postun):	desktop-file-utils
 Requires:	OpenGL
 Requires:	freetype
 Requires:	python3-modules
+ExclusiveArch:	%{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
@@ -74,9 +77,9 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python(\s|$),#!%{__python3}\1,' -e '1s,#!\s*/usr/bin/env\s+python3(\s|$),#!%{__python3}\1,' \
-      release/bin/blender-thumbnailer.py \
       release/scripts/addons/io_curve_svg/svg_util_test.py \
       release/scripts/addons/io_scene_fbx/fbx2json.py \
       release/scripts/addons/io_scene_fbx/json2fbx.py \
@@ -129,7 +132,9 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_mandir}/man1}
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-./doc/manpage/blender.1.py $RPM_BUILD_ROOT%{_bindir}/blender $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
+./doc/manpage/blender.1.py \
+	--blender $RPM_BUILD_ROOT%{_bindir}/blender \
+	--output $RPM_BUILD_ROOT%{_mandir}/man1/blender.1
 
 #%find_lang %{name}
 
@@ -147,7 +152,7 @@ rm -rf $RPM_BUILD_ROOT
 # -f %{name}.lang
 %doc doc/license/bf-members.txt doc/guides/*.txt
 %attr(755,root,root) %{_bindir}/blender
-%attr(755,root,root) %{_bindir}/blender-thumbnailer.py
+%attr(755,root,root) %{_bindir}/blender-thumbnailer
 %attr(755,root,root) %{_datadir}/%{name}
 %{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/scalable/apps/blender.svg
