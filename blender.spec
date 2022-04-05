@@ -4,17 +4,15 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	3.0.1
-Release:	3
+Version:	3.1.0
+Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
-Source0:	http://download.blender.org/source/%{name}-%{version}.tar.xz
-# Source0-md5:	41cccf2fe68b9b307204e9b9b2278b0c
+Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
+# Source0-md5:	483e16f010cc8c2363ba05b716fde3d0
 Patch0:		%{name}-2.76-droid.patch
 Patch1:		format-security.patch
-Patch2:		oiio-2.3.patch
-Patch3:		openexr3.patch
-URL:		http://www.blender.org/
+URL:		https://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenColorIO-devel
 BuildRequires:	OpenEXR-devel
@@ -46,8 +44,8 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	openjpeg2-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pugixml-devel
-BuildRequires:	python3
-BuildRequires:	python3-devel
+BuildRequires:	python3 >= 1:3.10
+BuildRequires:	python3-devel >= 1:3.10
 BuildRequires:	python3-numpy-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.385
@@ -57,7 +55,7 @@ BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
 Requires:	OpenGL
 Requires:	freetype
-Requires:	python3-modules
+Requires:	python3-modules >= 1:3.10
 ExclusiveArch:	%{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -76,8 +74,6 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python(\s|$),#!%{__python3}\1,' -e '1s,#!\s*/usr/bin/env\s+python3(\s|$),#!%{__python3}\1,' \
       release/scripts/addons/io_curve_svg/svg_util_test.py \
