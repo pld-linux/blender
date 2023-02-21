@@ -12,6 +12,7 @@ Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
 # Source0-md5:	483e16f010cc8c2363ba05b716fde3d0
 Patch0:		%{name}-2.76-droid.patch
 Patch1:		format-security.patch
+Patch2:		boost1.81.patch
 URL:		https://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenColorIO-devel
@@ -74,6 +75,7 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python(\s|$),#!%{__python3}\1,' -e '1s,#!\s*/usr/bin/env\s+python3(\s|$),#!%{__python3}\1,' \
       release/scripts/addons/io_curve_svg/svg_util_test.py \
