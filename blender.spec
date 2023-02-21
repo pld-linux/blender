@@ -49,7 +49,7 @@ BuildRequires:	python3 >= 1:3.10
 BuildRequires:	python3-devel >= 1:3.10
 BuildRequires:	python3-numpy-devel
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.385
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	zlib-devel
