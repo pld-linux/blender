@@ -23,7 +23,7 @@ BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenImageIO-devel
 BuildRequires:	SDL2-devel
 BuildRequires:	boost-devel
-BuildRequires:	cmake
+BuildRequires:	cmake >= 3.10
 BuildRequires:	embree-devel
 BuildRequires:	ffmpeg-devel >= 0.4.9-4.20080930.1
 BuildRequires:	fftw3-devel
