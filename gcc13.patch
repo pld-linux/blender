@@ -1,0 +1,10 @@
+--- blender-3.1.0/extern/quadriflow/src/loader.cpp.orig	2022-01-28 14:02:15.000000000 +0100
++++ blender-3.1.0/extern/quadriflow/src/loader.cpp	2023-07-04 12:21:36.066850148 +0200
+@@ -8,6 +8,7 @@
+ 
+ #include "loader.hpp"
+ 
++#include <cstdint>
+ #include <fstream>
+ #include <unordered_map>
+ 
