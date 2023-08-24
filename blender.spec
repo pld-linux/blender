@@ -10,7 +10,7 @@ Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
 Version:	3.1.2
 Release:	1
-License:	GPL
+License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
 # Source0-md5:	0ba50e74e3a4acdb1b59d284ba1df827
