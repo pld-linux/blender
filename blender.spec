@@ -1,15 +1,19 @@
 # TODO:
 # - enable internalization support (BR libftgl)
 # - libsolid/libqhull/libode BR ?
+#
+# Conditional build:
+%bcond_with	openvdb	# OpenVDB support (3.1.x is not ready for openvdb 10)
+
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	3.1.0
-Release:	6
+Version:	3.1.2
+Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
-# Source0-md5:	483e16f010cc8c2363ba05b716fde3d0
+# Source0-md5:	0ba50e74e3a4acdb1b59d284ba1df827
 Patch0:		%{name}-2.76-droid.patch
 Patch1:		format-security.patch
 Patch2:		boost1.81.patch
@@ -44,6 +48,7 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	openjpeg2-devel
+%{?with_openvdb:BuildRequires:	openvdb-devel}
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pugixml-devel
 BuildRequires:	python3 >= 1:3.10
@@ -94,41 +99,40 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 install -d build
 cd build
 %cmake \
-	-DCMAKE_SKIP_RPATH:BOOL=ON \
+	-DBOOST_ROOT=%{_prefix} \
 	-DBUILD_SHARED_LIBS:BOOL=OFF \
-	-DWITH_FFTW3:BOOL=ON \
-	-DWITH_JACK:BOOL=ON \
-	-DWITH_JACK_DYNLOAD:BOOL=ON \
+	-DCMAKE_SKIP_RPATH:BOOL=ON \
+	-DOPENCOLLADA=%{_includedir} \
+	-DPYTHON_VERSION:STRING=%{py3_ver} \
+	-DWITH_CODEC_FFMPEG:BOOL=ON \
 	-DWITH_CODEC_SNDFILE:BOOL=ON \
-	-DWITH_IMAGE_OPENJPEG:BOOL=ON \
-	-DWITH_OPENCOLLADA:BOOL=ON \
-	-DWITH_OPENCOLORIO:BOOL=ON \
+	-DWITH_CXX_GUARDEDALLOC:BOOL=OFF \
 	-DWITH_CYCLES:BOOL=ON \
 	-DWITH_FFTW3:BOOL=ON \
-	-DWITH_MOD_OCEANSIM:BOOL=ON \
-	-DOPENCOLLADA=%{_includedir} \
-	-DWITH_PYTHON:BOOL=ON \
-	-DPYTHON_VERSION:STRING=%{py3_ver} \
-	-DWITH_PYTHON_INSTALL:BOOL=OFF \
-	-DWITH_CODEC_FFMPEG:BOOL=ON \
 	-DWITH_GAMEENGINE:BOOL=ON \
-	-DWITH_CXX_GUARDEDALLOC:BOOL=OFF \
-	-DWITH_INSTALL_PORTABLE:BOOL=OFF \
-	-DWITH_PYTHON_SAFETY:BOOL=ON \
-	-DWITH_PLAYER:BOOL=ON \
-	-DWITH_MEM_JEMALLOC:BOOL=ON \
-	-DWITH_SYSTEM_GLEW:BOOL=ON \
-	-DBOOST_ROOT=%{_prefix} \
+	-DWITH_IMAGE_OPENJPEG:BOOL=ON \
 	-DWITH_INPUT_NDOF:BOOL=ON \
+	-DWITH_INSTALL_PORTABLE:BOOL=OFF \
+	-DWITH_JACK:BOOL=ON \
+	-DWITH_JACK_DYNLOAD:BOOL=ON \
+	-DWITH_MEM_JEMALLOC:BOOL=ON \
+	-DWITH_MOD_OCEANSIM:BOOL=ON \
+	-DWITH_OPENCOLLADA:BOOL=ON \
+	-DWITH_OPENCOLORIO:BOOL=ON \
+	%{!?with_openvdb:-DWITH_OPENVDB:BOOL=OFF} \
+	-DWITH_PLAYER:BOOL=ON \
+	-DWITH_PYTHON:BOOL=ON \
+	-DWITH_PYTHON_INSTALL:BOOL=OFF \
+	-DWITH_PYTHON_SAFETY:BOOL=ON \
 	-DWITH_SDL:BOOL=ON \
 	-DWITH_SDL_DYNLOAD:BOOL=ON \
+	-DWITH_SYSTEM_GLEW:BOOL=ON \
 	..
 
 %{__make} V=1
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_mandir}/man1}
 
 %{__make} -C build install \
