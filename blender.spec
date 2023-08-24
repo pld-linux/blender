@@ -1,6 +1,14 @@
 # TODO:
 # - enable internalization support (BR libftgl)
 # - libsolid/libqhull/libode BR ?
+# - DRACO (requires WITH_PYTHON_INSTALL?)
+# - OSL, Cycles
+# - Alembic
+# - USD
+# - OpenImageDenoise
+# - OpenSubdiv
+# - XR_OpenXR_SDK
+# - OptiX
 #
 # Conditional build:
 %bcond_with	openvdb	# OpenVDB support (3.1.x is not ready for openvdb 10)
@@ -20,6 +28,7 @@ Patch2:		boost1.81.patch
 Patch3:		gcc13.patch
 URL:		https://www.blender.org/
 BuildRequires:	OpenAL-devel
+BuildRequires:	OpenCOLLADA-devel
 BuildRequires:	OpenColorIO-devel
 BuildRequires:	OpenEXR-devel
 BuildRequires:	OpenGL-devel
@@ -50,6 +59,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	openjpeg2-devel
 %{?with_openvdb:BuildRequires:	openvdb-devel}
 BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	potrace-devel
 BuildRequires:	pugixml-devel
 BuildRequires:	python3 >= 1:3.10
 BuildRequires:	python3-devel >= 1:3.10
@@ -58,6 +68,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	tbb-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xz
 BuildRequires:	zlib-devel
