@@ -8,7 +8,7 @@
 # - OpenImageDenoise
 # - OpenSubdiv
 # - XR_OpenXR_SDK
-# - OptiX
+# - OptiX >= 7.3.0
 #
 # Conditional build:
 %bcond_with	openvdb	# OpenVDB support (3.1.x is not ready for openvdb 10)
@@ -16,12 +16,12 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	3.1.2
+Version:	3.2.2
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
-# Source0-md5:	0ba50e74e3a4acdb1b59d284ba1df827
+# Source0-md5:	245de23f60dddc2b7be09142bcd3fbbf
 Patch0:		%{name}-2.76-droid.patch
 Patch1:		format-security.patch
 Patch2:		boost1.81.patch
@@ -29,7 +29,7 @@ Patch3:		gcc13.patch
 URL:		https://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenCOLLADA-devel
-BuildRequires:	OpenColorIO-devel
+BuildRequires:	OpenColorIO-devel >= 2.0.0
 BuildRequires:	OpenEXR-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-GLU-devel
@@ -37,30 +37,36 @@ BuildRequires:	OpenImageIO-devel
 BuildRequires:	SDL2-devel
 BuildRequires:	boost-devel
 BuildRequires:	cmake >= 3.10
-BuildRequires:	embree-devel
+BuildRequires:	embree-devel >= 3.8.0
 BuildRequires:	ffmpeg-devel >= 0.4.9-4.20080930.1
-BuildRequires:	fftw3-devel
+BuildRequires:	fftw3-devel >= 3
 BuildRequires:	freealut-devel
-BuildRequires:	freetype-devel
+BuildRequires:	freetype-devel >= 2
 BuildRequires:	ftgl-devel
 BuildRequires:	gcc >= 5:3.4.0
 BuildRequires:	gettext-tools
 BuildRequires:	glew-devel
+BuildRequires:	gmp-devel
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	jemalloc-devel
+BuildRequires:	libgomp-devel
+BuildRequires:	libharu-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libspnav-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
+BuildRequires:	libwebp-devel
+BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	openjpeg2-devel
 %{?with_openvdb:BuildRequires:	openvdb-devel}
 BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	pcre-devel
 BuildRequires:	potrace-devel
 BuildRequires:	pugixml-devel
+BuildRequires:	pulseaudio-devel
 BuildRequires:	python3 >= 1:3.10
 BuildRequires:	python3-devel >= 1:3.10
 BuildRequires:	python3-numpy-devel
@@ -69,9 +75,11 @@ BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	tbb-devel
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xz
 BuildRequires:	zlib-devel
+BuildRequires:	zstd-devel
 Requires(post,postun):	desktop-file-utils
 Requires:	OpenGL
 Requires:	freetype
@@ -113,14 +121,12 @@ cd build
 	-DBOOST_ROOT=%{_prefix} \
 	-DBUILD_SHARED_LIBS:BOOL=OFF \
 	-DCMAKE_SKIP_RPATH:BOOL=ON \
-	-DOPENCOLLADA=%{_includedir} \
 	-DPYTHON_VERSION:STRING=%{py3_ver} \
 	-DWITH_CODEC_FFMPEG:BOOL=ON \
 	-DWITH_CODEC_SNDFILE:BOOL=ON \
 	-DWITH_CXX_GUARDEDALLOC:BOOL=OFF \
 	-DWITH_CYCLES:BOOL=ON \
 	-DWITH_FFTW3:BOOL=ON \
-	-DWITH_GAMEENGINE:BOOL=ON \
 	-DWITH_IMAGE_OPENJPEG:BOOL=ON \
 	-DWITH_INPUT_NDOF:BOOL=ON \
 	-DWITH_INSTALL_PORTABLE:BOOL=OFF \
@@ -131,7 +137,6 @@ cd build
 	-DWITH_OPENCOLLADA:BOOL=ON \
 	-DWITH_OPENCOLORIO:BOOL=ON \
 	%{!?with_openvdb:-DWITH_OPENVDB:BOOL=OFF} \
-	-DWITH_PLAYER:BOOL=ON \
 	-DWITH_PYTHON:BOOL=ON \
 	-DWITH_PYTHON_INSTALL:BOOL=OFF \
 	-DWITH_PYTHON_SAFETY:BOOL=ON \
