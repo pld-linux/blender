@@ -1,10 +1,10 @@
---- blender-2.83.12/source/blender/blenfont/intern/blf_font_default.c~	2021-01-15 15:25:53.000000000 +0100
-+++ blender-2.83.12/source/blender/blenfont/intern/blf_font_default.c	2021-03-06 19:32:29.170479890 +0100
-@@ -33,7 +33,7 @@
+--- blender-3.3.10/source/blender/blenfont/intern/blf_font_default.c.orig	2023-08-29 21:13:45.888397875 +0200
++++ blender-3.3.10/source/blender/blenfont/intern/blf_font_default.c	2023-08-29 21:25:10.372376410 +0200
+@@ -18,7 +18,7 @@
  
  static int blf_load_font_default(const char *filename, const bool unique)
  {
--  const char *dir = BKE_appdir_folder_id(BLENDER_DATAFILES, "fonts");
+-  const char *dir = BKE_appdir_folder_id(BLENDER_DATAFILES, BLF_DATAFILES_FONTS_DIR);
 +  const char *dir = "/usr/share/fonts/blender";
    if (dir == NULL) {
      fprintf(stderr,

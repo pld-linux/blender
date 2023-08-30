@@ -16,15 +16,14 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	3.2.2
+Version:	3.3.10
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
-# Source0-md5:	245de23f60dddc2b7be09142bcd3fbbf
+# Source0-md5:	a190dbfc5dfd490d737ee64ba68ce79c
 Patch0:		%{name}-2.76-droid.patch
 Patch1:		format-security.patch
-Patch2:		boost1.81.patch
 Patch3:		gcc13.patch
 URL:		https://www.blender.org/
 BuildRequires:	OpenAL-devel
@@ -34,6 +33,7 @@ BuildRequires:	OpenEXR-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenImageIO-devel
+BuildRequires:	OpenXR-devel
 BuildRequires:	SDL2-devel
 BuildRequires:	boost-devel
 BuildRequires:	cmake >= 3.10
@@ -102,17 +102,19 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 %patch3 -p1
 
-%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python(\s|$),#!%{__python3}\1,' -e '1s,#!\s*/usr/bin/env\s+python3(\s|$),#!%{__python3}\1,' \
-      release/scripts/addons/io_curve_svg/svg_util_test.py \
-      release/scripts/addons/io_scene_fbx/fbx2json.py \
-      release/scripts/addons/io_scene_fbx/json2fbx.py \
-      release/scripts/addons/sun_position/geo.py \
-      release/scripts/modules/bl_i18n_utils/merge_po.py \
-      release/scripts/modules/bl_i18n_utils/utils_rtl.py \
-      release/scripts/modules/blend_render_info.py
+# not executable
+%{__sed} -i -e '/^#!\/usr\/bin\/env python/d' release/scripts/addons/sun_position/geo.py
+
+# /usr/bin/env python3
+%{__sed} -i -e '1s,/usr/bin/env python3,%{__python3},' \
+	release/scripts/addons/io_curve_svg/svg_util_test.py \
+	release/scripts/addons/io_scene_fbx/fbx2json.py \
+	release/scripts/addons/io_scene_fbx/json2fbx.py \
+	release/scripts/modules/bl_i18n_utils/merge_po.py \
+	release/scripts/modules/bl_i18n_utils/utils_rtl.py \
+	release/scripts/modules/blend_render_info.py
 
 %build
 install -d build
@@ -176,7 +178,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/blender
 %attr(755,root,root) %{_bindir}/blender-thumbnailer
 %attr(755,root,root) %{_datadir}/%{name}
-%{_desktopdir}/*.desktop
+%{_desktopdir}/blender.desktop
 %{_iconsdir}/hicolor/scalable/apps/blender.svg
 %{_iconsdir}/hicolor/symbolic/apps/blender-symbolic.svg
-%{_mandir}/man1/*
+%{_mandir}/man1/blender.1*
