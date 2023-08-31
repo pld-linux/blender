@@ -1,17 +1,16 @@
 # TODO:
 # - enable internalization support (BR libftgl)
-# - libsolid/libqhull/libode BR ?
 # - DRACO (requires WITH_PYTHON_INSTALL?)
 # - OSL, Cycles
 # - Alembic
 # - USD
 # - OpenImageDenoise
 # - OpenSubdiv
-# - XR_OpenXR_SDK
 # - OptiX >= 7.3.0
+# - NanoVDB
 #
 # Conditional build:
-%bcond_with	openvdb	# OpenVDB support (3.1.x is not ready for openvdb 10)
+%bcond_without	openvdb	# OpenVDB support
 
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
