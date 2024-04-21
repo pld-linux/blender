@@ -15,15 +15,15 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	3.3.10
-Release:	2
+# beware: don't use 3.3.17+, they have all the libs packaged (0.5GB compressed)
+Version:	3.3.16
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
-# Source0-md5:	a190dbfc5dfd490d737ee64ba68ce79c
+# Source0-md5:	19e574bfb36a7e05d7270d8dd8343fa7
 Patch0:		%{name}-2.76-droid.patch
 Patch1:		format-security.patch
-Patch3:		gcc13.patch
 URL:		https://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenCOLLADA-devel
@@ -101,7 +101,6 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch3 -p1
 
 # not executable
 %{__sed} -i -e '/^#!\/usr\/bin\/env python/d' release/scripts/addons/sun_position/geo.py
