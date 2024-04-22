@@ -8,6 +8,7 @@
 # - OpenSubdiv
 # - OptiX >= 7.3.0
 # - NanoVDB
+# - OpenPGL
 #
 # Conditional build:
 %bcond_without	openvdb	# OpenVDB support
@@ -16,12 +17,12 @@ Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
 # beware: don't use 3.3.17+, they have all the libs packaged (0.5GB compressed)
-Version:	3.3.16
+Version:	3.6.11
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
-# Source0-md5:	19e574bfb36a7e05d7270d8dd8343fa7
+# Source0-md5:	32ec8c8403ead5e843edc1a26bdecb03
 Patch0:		%{name}-2.76-droid.patch
 Patch1:		format-security.patch
 URL:		https://www.blender.org/
@@ -34,7 +35,7 @@ BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenImageIO-devel
 BuildRequires:	OpenXR-devel
 BuildRequires:	SDL2-devel
-BuildRequires:	boost-devel
+BuildRequires:	boost-devel >= 1.48
 BuildRequires:	cmake >= 3.10
 BuildRequires:	embree-devel >= 3.8.0
 BuildRequires:	ffmpeg-devel >= 0.4.9-4.20080930.1
@@ -44,10 +45,11 @@ BuildRequires:	freetype-devel >= 2
 BuildRequires:	ftgl-devel
 BuildRequires:	gcc >= 5:3.4.0
 BuildRequires:	gettext-tools
-BuildRequires:	glew-devel
 BuildRequires:	gmp-devel
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	jemalloc-devel
+BuildRequires:	libdecor-devel >= 0.1
+BuildRequires:	libepoxy-devel
 BuildRequires:	libgomp-devel
 BuildRequires:	libharu-devel
 BuildRequires:	libjpeg-devel
@@ -59,10 +61,11 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	libwebp-devel
 BuildRequires:	libxml2-devel >= 2.0
-BuildRequires:	openjpeg2-devel
+BuildRequires:	openjpeg2-devel >= 2
 %{?with_openvdb:BuildRequires:	openvdb-devel}
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pcre-devel
+BuildRequires:	pkgconfig
 BuildRequires:	potrace-devel
 BuildRequires:	pugixml-devel
 BuildRequires:	pulseaudio-devel
@@ -74,19 +77,22 @@ BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	tbb-devel
+# wayland-client, wayland-cursor, wayland-scanner
+BuildRequires:	wayland-devel >= 1.12
+BuildRequires:	wayland-egl-devel
+BuildRequires:	wayland-protocols >= 1.31
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXi-devel
+BuildRequires:	xorg-lib-libxkbcommon-devel
 BuildRequires:	xz
 BuildRequires:	zlib-devel
 BuildRequires:	zstd-devel
 Requires(post,postun):	desktop-file-utils
 Requires:	OpenGL
-Requires:	freetype
 Requires:	python3-modules >= 1:3.10
 ExclusiveArch:	%{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
 Blender is a free and fully functional 3D modeling, rendering,
@@ -102,17 +108,14 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %patch0 -p1
 %patch1 -p1
 
-# not executable
-%{__sed} -i -e '/^#!\/usr\/bin\/env python/d' release/scripts/addons/sun_position/geo.py
-
 # /usr/bin/env python3
 %{__sed} -i -e '1s,/usr/bin/env python3,%{__python3},' \
-	release/scripts/addons/io_curve_svg/svg_util_test.py \
-	release/scripts/addons/io_scene_fbx/fbx2json.py \
-	release/scripts/addons/io_scene_fbx/json2fbx.py \
-	release/scripts/modules/bl_i18n_utils/merge_po.py \
-	release/scripts/modules/bl_i18n_utils/utils_rtl.py \
-	release/scripts/modules/blend_render_info.py
+	scripts/addons/io_curve_svg/svg_util_test.py \
+	scripts/addons/io_scene_fbx/fbx2json.py \
+	scripts/addons/io_scene_fbx/json2fbx.py \
+	scripts/modules/bl_i18n_utils/merge_po.py \
+	scripts/modules/bl_i18n_utils/utils_rtl.py \
+	scripts/modules/blend_render_info.py
 
 %build
 install -d build
@@ -142,7 +145,6 @@ cd build
 	-DWITH_PYTHON_SAFETY:BOOL=ON \
 	-DWITH_SDL:BOOL=ON \
 	-DWITH_SDL_DYNLOAD:BOOL=ON \
-	-DWITH_SYSTEM_GLEW:BOOL=ON \
 	..
 
 %{__make} V=1
