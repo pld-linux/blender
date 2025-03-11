@@ -106,9 +106,9 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%patch -P 0 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
 
 # /usr/bin/env python3
 %{__sed} -i -e '1s,/usr/bin/env python3,%{__python3},' \
