@@ -1,0 +1,11 @@
+--- blender-4.4.0/CMakeLists.txt~	2025-03-06 03:05:07.000000000 +0100
++++ blender-4.4.0/CMakeLists.txt	2025-03-24 20:59:35.583315735 +0100
+@@ -2519,7 +2519,7 @@
+     # Always use numpy bundled in precompiled libs.
+   elseif((WITH_PYTHON_INSTALL AND WITH_PYTHON_INSTALL_NUMPY) OR WITH_PYTHON_NUMPY)
+     if(("${PYTHON_NUMPY_PATH}" STREQUAL "") OR (${PYTHON_NUMPY_PATH} MATCHES NOTFOUND))
+-      find_python_package(numpy "core/include")
++      find_python_package(numpy "_core/include")
+     endif()
+   endif()
+ 

@@ -16,23 +16,20 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-# beware: don't use 3.3.17+, they have all the libs packaged (0.5GB compressed)
-Version:	3.6.12
-Release:	4
+Version:	4.4.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
-# Source0-md5:	8ab5d1389185b12a2f2bfdde171524e3
-Patch0:		%{name}-2.76-droid.patch
-Patch1:		format-security.patch
-Patch2:		%{name}-openvdb11.patch
+# Source0-md5:	3119090d2744733970ec2345b1f3db94
+Patch0:		numpy2.patch
 URL:		https://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenCOLLADA-devel
 BuildRequires:	OpenColorIO-devel >= 2.0.0
 BuildRequires:	OpenEXR-devel
-BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-GLU-devel
+BuildRequires:	OpenGL-devel
 BuildRequires:	OpenImageIO-devel
 BuildRequires:	OpenXR-devel
 BuildRequires:	SDL2-devel
@@ -63,8 +60,8 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	libwebp-devel
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	openjpeg2-devel >= 2
-%{?with_openvdb:BuildRequires:	openvdb-devel}
 BuildRequires:	openssl-devel >= 0.9.7d
+%{?with_openvdb:BuildRequires:	openvdb-devel}
 BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
 BuildRequires:	potrace-devel
@@ -95,6 +92,10 @@ Requires:	python3-modules >= 1:3.10
 ExclusiveArch:	%{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# blender needs -march=x86-64-v2, let it pick
+%define		filterout_c	-march=x86-64 -mtune=generic
+%define		filterout_cxx	-march=x86-64 -mtune=generic
+
 %description
 Blender is a free and fully functional 3D modeling, rendering,
 animation and game creation package for Unix, Windows and BeOS
@@ -107,17 +108,6 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %prep
 %setup -q
 %patch -P 0 -p1
-%patch -P 1 -p1
-%patch -P 2 -p1
-
-# /usr/bin/env python3
-%{__sed} -i -e '1s,/usr/bin/env python3,%{__python3},' \
-	scripts/addons/io_curve_svg/svg_util_test.py \
-	scripts/addons/io_scene_fbx/fbx2json.py \
-	scripts/addons/io_scene_fbx/json2fbx.py \
-	scripts/modules/bl_i18n_utils/merge_po.py \
-	scripts/modules/bl_i18n_utils/utils_rtl.py \
-	scripts/modules/blend_render_info.py
 
 %build
 install -d build
@@ -181,6 +171,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/blender-thumbnailer
 %attr(755,root,root) %{_datadir}/%{name}
 %{_desktopdir}/blender.desktop
+%{_datadir}/metainfo/org.blender.Blender.metainfo.xml
 %{_iconsdir}/hicolor/scalable/apps/blender.svg
 %{_iconsdir}/hicolor/symbolic/apps/blender-symbolic.svg
 %{_mandir}/man1/blender.1*
