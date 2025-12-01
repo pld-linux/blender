@@ -16,13 +16,12 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	4.4.0
+Version:	5.0.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
-# Source0-md5:	3119090d2744733970ec2345b1f3db94
-Patch0:		numpy2.patch
+# Source0-md5:	3c064098e099ce62fe8404fcdb0ca30f
 URL:		https://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenCOLLADA-devel
@@ -35,7 +34,7 @@ BuildRequires:	OpenXR-devel
 BuildRequires:	SDL2-devel
 BuildRequires:	boost-devel >= 1.48
 BuildRequires:	cmake >= 3.10
-BuildRequires:	embree-devel >= 3.8.0
+BuildRequires:	embree-devel >= 4.4.0
 BuildRequires:	ffmpeg-devel >= 0.4.9-4.20080930.1
 BuildRequires:	fftw3-devel >= 3
 BuildRequires:	freealut-devel
@@ -107,7 +106,6 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 
 %prep
 %setup -q
-%patch -P 0 -p1
 
 %build
 install -d build
