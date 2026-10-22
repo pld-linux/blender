@@ -16,12 +16,13 @@
 Summary:	3D modeling, rendering, animation and game creation package
 Summary(pl.UTF-8):	Pakiet do tworzenia animacji 3D oraz gier
 Name:		blender
-Version:	5.0.0
-Release:	3
+Version:	5.2.2
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
-# Source0-md5:	3c064098e099ce62fe8404fcdb0ca30f
+# Source0-md5:	8fcb442090c29a4f12652dcd9d6ae1f8
+Patch0:		eigen3.patch
 URL:		https://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenCOLLADA-devel
@@ -32,8 +33,16 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	OpenImageIO-devel
 BuildRequires:	OpenXR-devel
 BuildRequires:	SDL2-devel
+BuildRequires:	SuiteSparse-AMD-devel
+BuildRequires:	SuiteSparse-CAMD-devel
+BuildRequires:	SuiteSparse-CCOLAMD-devel
+BuildRequires:	SuiteSparse-CHOLMOD-devel
+BuildRequires:	SuiteSparse-COLAMD-devel
+BuildRequires:	SuiteSparse-SPQR-devel
 BuildRequires:	boost-devel >= 1.48
+BuildRequires:	ceres-solver-devel
 BuildRequires:	cmake >= 3.10
+BuildRequires:	eigen3
 BuildRequires:	embree-devel >= 4.4.0
 BuildRequires:	ffmpeg-devel >= 0.4.9-4.20080930.1
 BuildRequires:	fftw3-devel >= 3
@@ -106,6 +115,7 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 
 %prep
 %setup -q
+%patch -P0 -p1
 
 %build
 install -d build
