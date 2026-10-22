@@ -23,6 +23,7 @@ Group:		X11/Applications/Graphics
 Source0:	https://download.blender.org/source/%{name}-%{version}.tar.xz
 # Source0-md5:	8fcb442090c29a4f12652dcd9d6ae1f8
 Patch0:		eigen3.patch
+Patch1:		ffmpeg9.patch
 URL:		https://www.blender.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenCOLLADA-devel
@@ -116,6 +117,7 @@ Blender to darmowy i w pełni funkcjonalny pakiet do tworzenia animacji
 %prep
 %setup -q
 %patch -P0 -p1
+%patch -P1 -p1
 
 %build
 install -d build
