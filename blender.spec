@@ -52,6 +52,8 @@ BuildRequires:	freetype-devel >= 2
 BuildRequires:	ftgl-devel
 BuildRequires:	gcc >= 5:3.4.0
 BuildRequires:	gettext-tools
+BuildRequires:	gflags-devel
+BuildRequires:	glog-devel
 BuildRequires:	gmp-devel
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	jemalloc-devel
@@ -82,6 +84,7 @@ BuildRequires:	python3-numpy-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
+BuildRequires:	shaderc-devel >= 2026.3
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	tbb-devel
 # wayland-client, wayland-cursor, wayland-scanner
@@ -145,6 +148,9 @@ cd build
 	-DWITH_PYTHON:BOOL=ON \
 	-DWITH_PYTHON_INSTALL:BOOL=OFF \
 	-DWITH_PYTHON_SAFETY:BOOL=ON \
+	-DWITH_SYSTEM_GFLAGS:BOOL=ON \
+	-DWITH_SYSTEM_GLOG:BOOL=ON \
+	-DWITH_SYSTEM_FREETYPE:BOOL=ON \
 	-DWITH_SDL:BOOL=ON \
 	-DWITH_SDL_DYNLOAD:BOOL=ON \
 	..
@@ -176,10 +182,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 # -f %{name}.lang
-%doc doc/license/bf-members.txt doc/guides/*.txt
+%doc doc/license/bf-members.txt
 %attr(755,root,root) %{_bindir}/blender
 %attr(755,root,root) %{_bindir}/blender-thumbnailer
 %attr(755,root,root) %{_datadir}/%{name}
+%{_libdir}/%{name}
 %{_desktopdir}/blender.desktop
 %{_datadir}/metainfo/org.blender.Blender.metainfo.xml
 %{_iconsdir}/hicolor/scalable/apps/blender.svg
